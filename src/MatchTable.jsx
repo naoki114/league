@@ -1,5 +1,5 @@
 import React from 'react';
-import dummyMatchResults from './dummyMatchResults';
+import dummyMatchResults from './dummyMatchResults'; // FIXME:仮実装
 
 export default class MatchTable extends React.PureComponent {
 	
@@ -23,6 +23,10 @@ export default class MatchTable extends React.PureComponent {
 
 	/**
 	 *　対戦表の行を描画
+	 * @param playerId 行に対応するplayerId
+	 * @param playerIdList プレイヤーのIdList
+	 * @param playerMap プレイヤーの実体のMap
+     * @param matchResultMap 対戦成績の実体のMap
 	　*/
 	renderRow(playerId, playerIdList, playerMap, matchResultMap){
 		const playerName = playerMap.getIn([playerId, 'name']);
