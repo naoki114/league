@@ -42,7 +42,9 @@ export default class MatchTable extends React.PureComponent {
 				 			const matchResult = matchResultMap.get(matchResultId);
 				 			return this.renderCell(matchResult, playerId, innerPlayerId);
 			 			}
-			 			return null;
+			 			return (
+			 				<div className="emptyCell" />
+			 			)
 			 		})
 			 	}
 			</div>
