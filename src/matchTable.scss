@@ -1,0 +1,25 @@
+.matchTable {
+    border: 1px;
+    display: table;
+    .row {
+      float: none;
+      height: 40px;
+      line-height: 40px;
+
+      .cell {
+      	display: table-cell;
+      	border: 1px solid black;
+        width: 150px;
+        height: 40px;
+        line-height: 40px;
+      }
+      .playerName {
+       }
+      .emptyCell {
+        background-color: gray;
+      }
+      .matchResultCell {
+      	background-color: white;
+      }
+    }
+  } 
