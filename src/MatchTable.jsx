@@ -7,6 +7,7 @@ export default class MatchTable extends React.PureComponent {
 		return {
 			players: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			matchResults: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+			onClickAddPlayerButton: React.PropTypes.func.isRequired,
 		};
 	}
 	
@@ -85,6 +86,7 @@ export default class MatchTable extends React.PureComponent {
 		const matchResultMap = matchResults.get('byId');
 		return (
 			<div className="matchTable">
+				{this.renderButtonGroup()}
 				{
 					// 行を生成
 					playerIdList.map((playerId) => {
