@@ -6,7 +6,7 @@ const dummyMatchResults = Immutable.fromJS({
 		byId: {
 			A: {
 				name: 'テスト１',
-				matchResultIdMap: { 'B':'1', 'C':'2'}
+				matchResultIdMap: { B:'1', C:'2'}
 			},
 			B: {
 				name: 'テスト２',
