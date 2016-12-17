@@ -8,7 +8,6 @@ import configureStore from './configureStore.js';
 import Root from './Root.jsx';
 import rootReducer from './rootReducer.js';
 import logo from './logo.svg';
-import './App.css';
 
 function mapStateToProps(state) {
     return {};
@@ -23,6 +22,7 @@ const RootContainer = connect(
 )(Root);
 
 export default RootContainer;
+import './App.scss';
 
 
 function main() {
