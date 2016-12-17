@@ -29,10 +29,13 @@ export default class MatchTable extends React.PureComponent {
      * @param matchResultMap 対戦成績の実体のMap
 	　*/
 	renderRow(playerId, playerIdList, playerMap, matchResultMap){
-		const playerName = playerMap.getIn([playerId, 'name']);
 		const matchResultIdMap = playerMap.getIn([playerId, 'matchResultIdMap']);
+		const playerName = playerMap.getIn([playerId, 'name']);
 		return (
 			<div className="row">
+				<div className="playerName">
+					{playerName}
+				</div>
 			 	{
 			 		playerIdList.map((innerPlayerId) => {
 			 			if(innerPlayerId !== playerId) {
