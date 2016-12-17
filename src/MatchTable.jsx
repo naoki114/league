@@ -21,7 +21,7 @@ export default class MatchTable extends React.PureComponent {
 		const rightPlayerPoint = matchResult.getIn([rightPlayerId, 'point']);
 		const resultString = [leftPlayerPoint, rightPlayerPoint].join('-');
 		return (
-			<div className="matchResultCell">
+			<div className="matchResultCell cell" key={rightPlayerId}>
 				{resultString}
 			</div>  
 
@@ -39,9 +39,9 @@ export default class MatchTable extends React.PureComponent {
 		const matchResultIdMap = playerMap.getIn([playerId, 'matchResultIdMap']);
 		const playerName = playerMap.getIn([playerId, 'name']);
 		return (
-			<div className="row">
-				<div className="playerName">
-					{playerName}
+			<div className="row" key={playerId}>
+				<div className="playerName cell">
+						{playerName}
 				</div>
 			 	{
 			 		playerIdList.map((innerPlayerId) => {
@@ -53,7 +53,7 @@ export default class MatchTable extends React.PureComponent {
 				 			return this.renderCell(matchResult, playerId, innerPlayerId);
 			 			}
 			 			return (
-			 				<div className="emptyCell" />
+			 				<div className="emptyCell cell" key={innerPlayerId}/>
 			 			)
 			 		})
 			 	}
