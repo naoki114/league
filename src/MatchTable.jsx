@@ -1,7 +1,14 @@
 import React from 'react';
-import dummyMatchResults from './dummyMatchResults'; // FIXME:仮実装
+import Immutable from 'immutable';
 
 export default class MatchTable extends React.PureComponent {
+
+	static get propTypes(){
+		return {
+			players: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+			matchResults: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+		};
+	}
 	
 	/**
 	 * 対戦表のセルを描画
@@ -54,13 +61,28 @@ export default class MatchTable extends React.PureComponent {
 		);
 	}
 
+	renderButtonGroup() {
+		const onClickAddPlayerButton = this.props.onClickAddPlayerButton;
+		return (
+			<div className="buttonGroup">
+				<button
+					className="addPlayerButton"
+					onClick={() => {
+						onClickAddPlayerButton()
+					}}
+				>
+					参加者追加
+				</button>
+			</div>
+		)
+	}
 
 	render() {
-		const matchResults = dummyMatchResults;
-		const players = matchResults.get('players');
+		const matchResults = this.props.matchResults;
+		const players = this.props.players;
 		const playerIdList = players.get('idList');
 		const playerMap =  players.get('byId');
-		const matchResultMap = matchResults.getIn(['matchResults', 'byId']);
+		const matchResultMap = matchResults.get('byId');
 		return (
 			<div className="matchTable">
 				{
