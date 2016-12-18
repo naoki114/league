@@ -37,7 +37,6 @@ export default class MatchTable extends React.PureComponent {
      * @param matchResultMap 対戦成績の実体のMap
 	　*/
 	renderRow(playerId, playerIdList, playerMap, matchResultMap){
-		const matchResultIdMap = playerMap.getIn([playerId, 'matchResultIdMap']);
 		const playerName = playerMap.getIn([playerId, 'name']);
 		return (
 			<div className="row" key={playerId}>
@@ -47,10 +46,12 @@ export default class MatchTable extends React.PureComponent {
 			 	{
 			 		playerIdList.map((innerPlayerId) => {
 			 			if(innerPlayerId !== playerId) {
-				 			const matchResultId = matchResultIdMap.get(innerPlayerId);
-				 			console.log(matchResultIdMap.toJS());
-				 			console.log(innerPlayerId);
-				 			const matchResult = matchResultMap.get(matchResultId);
+			 				let matchResultId = [playerId, innerPlayerId].join('-');
+				 			let matchResult = matchResultMap.get(matchResultId);
+				 			if(matchResult === undefined) {
+				 				matchResultId = [innerPlayerId, playerId].join('-');
+				 				matchResult = matchResultMap.get(matchResultId);
+				 			}
 				 			return this.renderCell(matchResult, playerId, innerPlayerId);
 			 			}
 			 			return (
