@@ -22,7 +22,6 @@ function createEmptyResult(primaryPlayerId, playerIdList){
 			matchResults[newId][primaryPlayerId] = {point:0};
 			matchResults[newId][playerId] = {point:0};	
 		}
-		console.log(matchResults);
 	});
 	return matchResults;
 }
@@ -35,7 +34,6 @@ export default function rootReducer(state = initialState, action) {
     	const newId = maxId + 1;
     	const newMatchResults = createEmptyResult(newId, idList);
     	const oldMatchResults = state.getIn(['matchResults','byId']);
-    	console.log( newMatchResults);
     	return state.withMutations((ctx) => {
     		return ctx.setIn(['players','maxId'], newId)
     		.setIn(['players', 'idList'], idList.push(newId.toString()))
