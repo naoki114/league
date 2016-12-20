@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import MatrchTable from './MatchTable.jsx';
-//import MatchTableActions from './MatchTableActions.js';
+import MatchTableActions from './MatchTableActions.js';
 import matchTableActionTypes from './matchTableActionTypes.js';
 function mapStateToProps(state) {
     return {
@@ -11,10 +11,7 @@ function mapStateToProps(state) {
 
 
 function addPlayer(playerName){
-	return ({
-		type: matchTableActionTypes.ADD_PLAYER,
-		playerName,
-	});
+	return (MatchTableActions.addPlayer(playerName));
 }
 function mapDispatchToEvents(dispatch) {
     return {
