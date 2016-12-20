@@ -10,14 +10,11 @@ function mapStateToProps(state) {
 }
 
 
-function addPlayer(playerName){
-	return (MatchTableActions.addPlayer(playerName));
-}
 function mapDispatchToEvents(dispatch) {
     return {
     	onClickAddPlayerButton: () => {
     		dispatch(
-    			addPlayer('a')
+    			MatchTableActions.addPlayer('a')
     		);
     	}
     };
