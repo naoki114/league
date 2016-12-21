@@ -38,7 +38,7 @@ export default function rootReducer(state = initialState, action) {
     		return ctx.setIn(['players','maxId'], newId)
     		.setIn(['players', 'idList'], idList.push(newId.toString()))
     		.setIn(
-    			['players', 'byId', newId],
+    			['players', 'byId', newId.toString()],
     			new Immutable.Map({
     				name: action.playerName,
     			})
