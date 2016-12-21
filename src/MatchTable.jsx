@@ -31,6 +31,26 @@ export default class MatchTable extends React.PureComponent {
 		)
 	}
 
+	renderHeaderRow(players){
+		const playerIdList = players.get('idList');
+		const playerMap =  players.get('byId');
+		// 行を生成
+		return (
+			<div className="headerRow">
+				<div className="cell emptyCell" />
+				{
+					playerIdList.map((playerId) => {
+						return (
+							<div className="HeaderPlayerName cell" key={playerId}>
+								{playerMap.getIn([playerId, 'name'])}
+							</div>
+						);
+					})
+				}
+			</div>
+		);
+	}
+
 	renderRows(players, matchResults){
 
 		const playerIdList = players.get('idList');
@@ -56,6 +76,7 @@ export default class MatchTable extends React.PureComponent {
 		return (
 			<div className="matchTable">
 				{this.renderButtonGroup()}
+				{this.renderHeaderRow(players)}
 				{this.renderRows(players, matchResults)}			
 			</div>
 		);
