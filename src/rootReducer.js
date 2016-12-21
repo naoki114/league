@@ -10,6 +10,7 @@ const initialState = Immutable.fromJS({
 	matchResults: {
 		byId: {},
 	},
+	tmpPlayerName: "",
 });
 
 function createEmptyResult(primaryPlayerId, playerIdList){
@@ -40,12 +41,15 @@ export default function rootReducer(state = initialState, action) {
     		.setIn(
     			['players', 'byId', newId.toString()],
     			new Immutable.Map({
-    				name: action.playerName,
+    				name: state.get('tmpPlayerName')
     			})
     		).setIn(
     			['matchResults', 'byId'], oldMatchResults.mergeDeep(newMatchResults)
     		)
     	});
+    }
+    case matchTableActionTypes.CHANGE_TMP_PLAYER_NAME: {
+    	return state.set('tmpPlayerName', action.playerName);
     }
     default:
         return state;

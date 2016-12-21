@@ -6,6 +6,7 @@ function mapStateToProps(state) {
     return {
     	players: state.get('players'),
     	matchResults: state.get('matchResults'),
+        tmpPlayername: state.get('tmpPlayerName'),
     };
 }
 
@@ -14,9 +15,14 @@ function mapDispatchToEvents(dispatch) {
     return {
     	onClickAddPlayerButton: () => {
     		dispatch(
-    			MatchTableActions.addPlayer('a')
+    			MatchTableActions.addPlayer()
     		);
-    	}
+    	},
+        onChangeTmpPlayerName: (playerName) => {
+            dispatch(
+                MatchTableActions.changeTmpPlayerName(playerName)  
+            )
+        }
     };
 }
 

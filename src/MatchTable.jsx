@@ -9,24 +9,31 @@ export default class MatchTable extends React.PureComponent {
 		return {
 			players: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			matchResults: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+			tmpPlayerName: React.PropTypes.string,
 			onClickAddPlayerButton: React.PropTypes.func.isRequired,
+			onChangeTmpPlayerName: React.PropTypes.func.isRequired,
 		};
 	}
 	
 
 
-	renderButtonGroup() {
+	renderButtonGroup(tmpPlayerName) {
 		const onClickAddPlayerButton = this.props.onClickAddPlayerButton;
+		const onChangeTmpPlayerName = this.props.onChangeTmpPlayerName;
 		return (
 			<div className="buttonGroup">
 				<button
 					className="addPlayerButton"
-					onClick={() => {
-						onClickAddPlayerButton()
-					}}
+					onClick={onClickAddPlayerButton}
 				>
 					参加者追加
 				</button>
+				<input
+					className="playerNameField"
+					type="text"
+					value={tmpPlayerName}
+					onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
+				/>
 			</div>
 		)
 	}
@@ -71,12 +78,15 @@ export default class MatchTable extends React.PureComponent {
 	}
 
 	render() {
-		const matchResults = this.props.matchResults;
-		const players = this.props.players;
+		const {
+			matchResults,
+			players,
+			tmpPlayerName
+		} = this.props;
 		
 		return (
 			<div className="matchTable">
-				{this.renderButtonGroup()}
+				{this.renderButtonGroup(tmpPlayerName)}
 				{this.renderHeaderRow(players)}
 				{this.renderRows(players, matchResults)}			
 			</div>
