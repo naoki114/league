@@ -64,6 +64,7 @@ export default class MatchTable extends React.PureComponent {
 					playerIdList={playerIdList}
 					playerMap={playerMap}
 					matchResultMap={matchResultMap}
+					key={playerId}
 				/>
 			);
 		})
