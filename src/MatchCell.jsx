@@ -73,7 +73,6 @@ export default class MatchCell extends React.PureComponent{
 		const isOpenEditor =
 			(editingLeftPlayerId === leftPlayerId)
 			&& (editingRightPlayerId === rightPlayerId);
-		console.log(editingLeftPlayerId, editingRightPlayerId, isOpenEditor);
 		return (
 			<div
 				className="matchCell cell"

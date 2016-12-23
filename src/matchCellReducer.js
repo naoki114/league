@@ -9,14 +9,12 @@ const initialState = Immutable.fromJS({
 export default function matchCellReducer(state = initialState, action) {
     switch (action.type) {
     	case matchCellActionTypes.OPEN_EDITOR: {
-            console.log('aab');
     		return state.withMutations((ctx) => {
                 ctx.set('editingLeftPlayerId', action.leftPlayerId)
                 .set('editingRightPlayerId', action.rightPlayerId);
             });
     	}
     	case matchCellActionTypes.CLOSE_EDITOR: {
-            console.log('aa');
     		return state.withMutations((ctx) => {
                 return ctx.set('editingLeftPlayerId', '1')
                 .set('editingRightPlayerId', '1');
