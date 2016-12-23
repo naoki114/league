@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
+import MatchCellContainer from './MatchCellContainer.js';
 
 /**
  *　対戦表の行を描画
@@ -12,7 +13,7 @@ export default class MatchRow extends React.PureComponent{
 			playerIdList: React.PropTypes.instanceOf(Immutable.List).isRequired,
 			playerMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			matchResultMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
-		}
+		};
 	}
 	
 	/**
@@ -21,15 +22,14 @@ export default class MatchRow extends React.PureComponent{
 	 * @param leftPlayerId 左側に表示するポイントのプレイヤーId
 	 * @param rightPlayerId 右側に表示するポイントのプレイヤーId
 	 */
-	renderCell (matchResult, leftPlayerId, rightPlayerId) {
-		const leftPlayerPoint = matchResult.getIn([leftPlayerId, 'point']);
-		const rightPlayerPoint = matchResult.getIn([rightPlayerId, 'point']);
-		const resultString = [leftPlayerPoint, rightPlayerPoint].join('-');
+	renderCell (matchResultId, matchResult, leftPlayerId, rightPlayerId) {
 		return (
-			<div className="matchResultCell cell" key={rightPlayerId}>
-				{resultString}
-			</div>  
-
+			<MatchCellContainer
+				matchResultId={matchResultId}
+				matchResult={matchResult}
+				leftPlayerId={leftPlayerId}
+				rightPlayerId={rightPlayerId}
+			/>
 		);
 	}
 
@@ -58,7 +58,7 @@ export default class MatchRow extends React.PureComponent{
 				 				matchResultId = [innerPlayerId, playerId].join('-');
 				 				matchResult = matchResultMap.get(matchResultId);
 				 			}
-				 			return this.renderCell(matchResult, playerId, innerPlayerId);
+				 			return this.renderCell(matchResultId, matchResult, playerId, innerPlayerId);
 			 			}
 			 			return (
 			 				<div className="emptyCell cell" key={innerPlayerId}/>
