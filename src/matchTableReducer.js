@@ -55,6 +55,18 @@ export default function matchTableReducer(state = initialState, action) {
     case matchTableActionTypes.CHANGE_TMP_PLAYER_NAME: {
     	return state.set('tmpPlayerName', action.playerName);
     }
+    case matchTableActionTypes.CHANGE_LEFT_PLAYER_POINT: {
+        return state.setIn(
+            ['matchResults', 'byId', action.matchResultId, action.leftPlayerId, 'point'],
+            action.leftPlayerPoint
+        );
+    }
+    case matchTableActionTypes.CHANGE_RIGHT_PLAYER_POINT: {
+        return state.setIn(
+            ['matchResults', 'byId', action.matchResultId, action.rightPlayerId, 'point'],
+            action.rightPlayerPoint
+        );
+    }
     default:
         return state;
     }

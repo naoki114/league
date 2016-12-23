@@ -13,4 +13,30 @@ export default class MatchTableActions {
 			playerName,
 		});
 	}
+
+	static changeLeftPlayerPoint(
+		matchResultId,
+		leftPlayerId,
+		leftPlayerPoint
+	){
+		return({
+			type: matchTableActionTypes.CHANGE_LEFT_PLAYER_POINT,
+			matchResultId,
+			leftPlayerId,
+			leftPlayerPoint,
+		})
+	}
+
+	static changeRightPlayerPoint(
+		matchResultId,
+		rightPlayerId,
+		rightPlayerPoint
+	){
+		return({
+			type: matchTableActionTypes.CHANGE_RIGHT_PLAYER_POINT,
+			matchResultId,
+			rightPlayerId,
+			rightPlayerPoint,
+		})
+	}
 }

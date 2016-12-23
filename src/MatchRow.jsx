@@ -13,6 +13,8 @@ export default class MatchRow extends React.PureComponent{
 			playerIdList: React.PropTypes.instanceOf(Immutable.List).isRequired,
 			playerMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			matchResultMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
+			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
 		};
 	}
 	
@@ -23,16 +25,19 @@ export default class MatchRow extends React.PureComponent{
 	 * @param rightPlayerId 右側に表示するポイントのプレイヤーId
 	 */
 	renderCell (matchResultId, matchResult, leftPlayerId, rightPlayerId) {
+		const onChangeLeftPlayerPoint = this.props.onChangeLeftPlayerPoint;
+		const onChangeRightPlayerPoint = this.props.onChangeRightPlayerPoint;
 		return (
 			<MatchCellContainer
 				matchResultId={matchResultId}
 				matchResult={matchResult}
 				leftPlayerId={leftPlayerId}
 				rightPlayerId={rightPlayerId}
+				onChangeLeftPlayerPoint={onChangeLeftPlayerPoint}
+				onChangeRightPlayerPoint={onChangeRightPlayerPoint}
 			/>
 		);
 	}
-
 	
 	render() {
 

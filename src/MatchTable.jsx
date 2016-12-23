@@ -12,6 +12,8 @@ export default class MatchTable extends React.PureComponent {
 			tmpPlayerName: React.PropTypes.string,
 			onClickAddPlayerButton: React.PropTypes.func.isRequired,
 			onChangeTmpPlayerName: React.PropTypes.func.isRequired,
+			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
+			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
 		};
 	}
 
@@ -57,10 +59,11 @@ export default class MatchTable extends React.PureComponent {
 	}
 
 	renderRows(players, matchResults){
-
 		const playerIdList = players.get('idList');
 		const playerMap =  players.get('byId');
 		const matchResultMap = matchResults.get('byId');
+		const onChangeLeftPlayerPoint = this.props.onChangeLeftPlayerPoint;
+		const onChangeRightPlayerPoint = this.props.onChangeRightPlayerPoint;
 		// 行を生成
 		return playerIdList.map((playerId) => {
 			return (
@@ -70,6 +73,8 @@ export default class MatchTable extends React.PureComponent {
 					playerMap={playerMap}
 					matchResultMap={matchResultMap}
 					key={playerId}
+					onChangeLeftPlayerPoint={onChangeLeftPlayerPoint}
+					onChangeRightPlayerPoint={onChangeRightPlayerPoint}
 				/>
 			);
 		})
@@ -86,7 +91,10 @@ export default class MatchTable extends React.PureComponent {
 			<div className="matchTable">
 				{this.renderButtonGroup(tmpPlayerName)}
 				{this.renderHeaderRow(players)}
-				{this.renderRows(players, matchResults)}			
+				{this.renderRows(
+					players,
+					matchResults
+				)}			
 			</div>
 		);
 	}

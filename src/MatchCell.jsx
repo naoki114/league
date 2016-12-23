@@ -13,6 +13,8 @@ export default class MatchCell extends React.PureComponent{
 			editingRightPlayerId: React.PropTypes.string,
 			onClickInputButton: React.PropTypes.func.isRequired,
 			onClickOkButton: React.PropTypes.func.isRequired,
+			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
+			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
 		};
 	}
 	renderEditButton(leftPlayerId, rightPlayerId){
@@ -27,7 +29,14 @@ export default class MatchCell extends React.PureComponent{
 			</button>
 		)
 	}
-	renderEditor(isOpenEditor){
+	renderEditor(
+		isOpenEditor,
+		matchResultId,
+		leftPlayerId,
+		leftPlayerPoint,
+		rightPlayerId,
+		rightPlayerPoint
+	){
 		if(isOpenEditor){
 			return (
 				<div className="matchEditor">
@@ -35,13 +44,29 @@ export default class MatchCell extends React.PureComponent{
 						<input
 							type={"number"}
 							min={0}
+							value={leftPlayerPoint}
 							className="pointInput left"
+							onChange={(e)=>{
+								this.props.onChangeLeftPlayerPoint(
+									matchResultId,
+									leftPlayerId,
+									e.target.value
+								);
+							}}
 						/>
 						-
 						<input
 							type={"number"}
 							min={0}
+							value={rightPlayerPoint}
 							className="pointInput right"
+							onChange={(e)=>{
+								this.props.onChangeRightPlayerPoint(
+									matchResultId,
+									rightPlayerId,
+									e.target.value
+								);
+							}}
 						/>
 						<button
 							className="okButton"
@@ -80,7 +105,14 @@ export default class MatchCell extends React.PureComponent{
 			>
 				{resultString}
 				{this.renderEditButton(leftPlayerId, rightPlayerId)}
-				{this.renderEditor(isOpenEditor)}
+				{this.renderEditor(
+					isOpenEditor,
+					matchResultId,
+					leftPlayerId,
+					leftPlayerPoint,
+					rightPlayerId,
+					rightPlayerPoint
+				)}
 			</div> 
 		);
 	}
