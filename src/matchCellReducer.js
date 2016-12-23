@@ -16,8 +16,8 @@ export default function matchCellReducer(state = initialState, action) {
     	}
     	case matchCellActionTypes.CLOSE_EDITOR: {
     		return state.withMutations((ctx) => {
-                return ctx.set('editingLeftPlayerId', '1')
-                .set('editingRightPlayerId', '1');
+                return ctx.set('editingLeftPlayerId', null)
+                .set('editingRightPlayerId', null);
             });
     	} 
     	default: {
