@@ -9,16 +9,47 @@ export default class MatchCell extends React.PureComponent{
 			matchResult: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			leftPlayerId: React.PropTypes.string.isRequired,
 			rightPlayerId: React.PropTypes.string.isRequired,
-			isOpenEditor: React.PropTypes.bool.isRequired,
+			editingLeftPlayerId: React.PropTypes.string,
+			editingRightPlayerId: React.PropTypes.string,
 			onClickMatchCell: React.PropTypes.func.isRequired,
 			onMouseLeaveMatchCell: React.PropTypes.func.isRequired,
 		};
 	}
-
-	renderEditor(isOepnEditor){
-		if(isOepnEditor){
+	renderEditButton(leftPlayerId, rightPlayerId){
+		return (
+			<button
+				className="editButton"
+				onClick={() => {
+					this.props.onClickMatchCell(leftPlayerId, rightPlayerId);
+				}}
+			>
+				入力
+			</button>
+		)
+	}
+	renderEditor(isOpenEditor){
+		if(isOpenEditor){
 			return (
 				<div className="matchEditor">
+					<div className="inputArea">
+						<input
+							type={"number"}
+							min={0}
+							className="pointInput left"
+						/>
+						-
+						<input
+							type={"number"}
+							min={0}
+							className="pointInput right"
+						/>
+						<button
+							className="okButton"
+							onClick={() => {this.props.onMouseLeaveMatchCell();}}
+						>
+							OK
+						</button>
+					</div>
 				</div>
 			);
 		}
@@ -31,25 +62,25 @@ export default class MatchCell extends React.PureComponent{
 			matchResult,
 			leftPlayerId,
 			rightPlayerId,
-			isOpenEditor,
+			editingLeftPlayerId,
+			editingRightPlayerId,
 			onClickMatchCell,
 			onMouseLeaveMatchCell
 		} = this.props;
 		const leftPlayerPoint = matchResult.getIn([leftPlayerId, 'point']);
 		const rightPlayerPoint = matchResult.getIn([rightPlayerId, 'point']);
 		const resultString = [leftPlayerPoint, rightPlayerPoint].join('-');
+		const isOpenEditor =
+			(editingLeftPlayerId === leftPlayerId)
+			&& (editingRightPlayerId === rightPlayerId);
+		console.log(editingLeftPlayerId, editingRightPlayerId, isOpenEditor);
 		return (
 			<div
 				className="matchCell cell"
 				key={rightPlayerId}
-				onClick={() => {
-					onClickMatchCell();
-				}}
-				onMouseLeave={() => {
-					onMouseLeaveMatchCell();
-				}}
 			>
 				{resultString}
+				{this.renderEditButton(leftPlayerId, rightPlayerId)}
 				{this.renderEditor(isOpenEditor)}
 			</div> 
 		);

@@ -13,18 +13,17 @@ function mapStateToProps(state, ownProps) {
         matchResult,
         leftPlayerId,
         rightPlayerId,
-        isOpenEditor: state.matchCell.get('isOpenEditor'),
+        editingLeftPlayerId: state.matchCell.get('editingLeftPlayerId'),
+        editingRightPlayerId: state.matchCell.get('editingRightPlayerId'),
     };
 }
 
 function mapDispatchToEvents(dispatch) {
     return {
-        onClickMatchCell: () => {
-            console.log('open');
-            dispatch(MatchCellActions.openEditor());
+        onClickMatchCell: (leftPlayerId, rightPlayerId) => {
+            dispatch(MatchCellActions.openEditor(leftPlayerId, rightPlayerId));
         },
         onMouseLeaveMatchCell: () => {
-            console.log('close');
             dispatch(MatchCellActions.closeEditor());
         }
     };
