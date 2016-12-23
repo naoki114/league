@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import MatchCell from './MatchCell.jsx';
 import MatchCellActions from './MatchCellActions.js';
-import matchCellActionTypes from './matchCellActionTypes.js';
 function mapStateToProps(state, ownProps) {
     const {
         matchResultId,
@@ -31,9 +30,9 @@ function mapDispatchToEvents(dispatch) {
     };
 }
 
-const RootContainer = connect(
+const MatchCellContainer = connect(
     mapStateToProps,
     mapDispatchToEvents
 )(MatchCell);
 
-export default RootContainer;
+export default MatchCellContainer;

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import MatrchTable from './MatchTable.jsx';
 import MatchTableActions from './MatchTableActions.js';
-import matchTableActionTypes from './matchTableActionTypes.js';
 function mapStateToProps(state) {
     return {
     	players: state.matchTable.get('players'),
