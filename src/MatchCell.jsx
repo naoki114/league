@@ -9,8 +9,20 @@ export default class MatchCell extends React.PureComponent{
 			matchResult: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			leftPlayerId: React.PropTypes.string.isRequired,
 			rightPlayerId: React.PropTypes.string.isRequired,
+			isOpenEditor: React.PropTypes.bool.isRequired,
 			onClickMatchCell: React.PropTypes.func.isRequired,
+			onMouseLeaveMatchCell: React.PropTypes.func.isRequired,
 		};
+	}
+
+	renderEditor(isOepnEditor){
+		if(isOepnEditor){
+			return (
+				<div className="matchEditor">
+				</div>
+			);
+		}
+		return null;
 	}
 
 	render(){
@@ -19,7 +31,9 @@ export default class MatchCell extends React.PureComponent{
 			matchResult,
 			leftPlayerId,
 			rightPlayerId,
-			onClickMatchCell
+			isOpenEditor,
+			onClickMatchCell,
+			onMouseLeaveMatchCell
 		} = this.props;
 		const leftPlayerPoint = matchResult.getIn([leftPlayerId, 'point']);
 		const rightPlayerPoint = matchResult.getIn([rightPlayerId, 'point']);
@@ -29,11 +43,15 @@ export default class MatchCell extends React.PureComponent{
 				className="matchCell cell"
 				key={rightPlayerId}
 				onClick={() => {
-					onClickMatchCell(matchResultId);
+					onClickMatchCell();
+				}}
+				onMouseLeave={() => {
+					onMouseLeaveMatchCell();
 				}}
 			>
 				{resultString}
-			</div>  
+				{this.renderEditor(isOpenEditor)}
+			</div> 
 		);
 	}
 }

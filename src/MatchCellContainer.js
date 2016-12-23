@@ -23,6 +23,10 @@ function mapDispatchToEvents(dispatch) {
         onClickMatchCell: () => {
             console.log('open');
             dispatch(MatchCellActions.openEditor());
+        },
+        onMouseLeaveMatchCell: () => {
+            console.log('close');
+            dispatch(MatchCellActions.closeEditor());
         }
     };
 }
