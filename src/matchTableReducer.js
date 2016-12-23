@@ -43,7 +43,11 @@ export default function matchTableReducer(state = initialState, action) {
     			new Immutable.Map({
     				name: state.get('tmpPlayerName')
     			})
-    		).setIn(
+    		)
+            .setIn(
+                state.set('tmpPlayerName', "")
+            )
+            .setIn(
     			['matchResults', 'byId'], oldMatchResults.mergeDeep(newMatchResults)
     		)
     	});

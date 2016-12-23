@@ -5,7 +5,7 @@ function mapStateToProps(state) {
     return {
     	players: state.matchTable.get('players'),
     	matchResults: state.matchTable.get('matchResults'),
-        tmpPlayername: state.matchTable.get('tmpPlayerName'),
+        tmpPlayerName: state.matchTable.get('tmpPlayerName'),
     };
 }
 
@@ -15,6 +15,9 @@ function mapDispatchToEvents(dispatch) {
     		dispatch(
     			MatchTableActions.addPlayer()
     		);
+            dispatch(
+                MatchTableActions.changeTmpPlayerName("") 
+            )
     	},
         onChangeTmpPlayerName: (playerName) => {
             dispatch(
