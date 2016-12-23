@@ -1,3 +1,50 @@
 .matchCell {
+	position: relative;
 	background-color: white;
+	outline: none;
+	.matchEditor {
+		position: absolute;
+		top: 0px;
+		left: #{$cellWidth - 30px};
+		width: $cellWidth;
+		height: $cellHeight;
+		background-color: #336699;
+		border: none;
+		border-radius: 5px 5px 5px 5px;
+		box-shadow: 5px 5px 5px rgba(0,0,0,0.3); 
+		z-index: 1;
+		&:after {
+			border: 10px solid transparent;
+			border-right-color: #336699;
+			border-left-width: 0;
+			width: 0;
+			left: -10px;
+			content: "";
+			display: block;
+			top: 10px;
+			position: absolute;
+		}
+		.inputArea {
+			margin-left: 10px;
+			line-height: $cellHeight;
+			color: white;
+			.pointInput {
+				width: 30px;
+				border: none;
+				outline: none;
+			}
+			.left {
+				border-radius: 5px 0px 0px 5px;
+				margin-right: 3px;
+			}
+			.right {
+				border-radius: 0px 5px 5px 0px;
+				margin-left: 3px;
+			}
+			.okButton {
+				margin-left: 10px;
+				width: 50px;
+			}
+		}
+	}
 }

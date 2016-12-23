@@ -1,8 +1,11 @@
 .row {
 	float: none;
-	height: 40px;
-	line-height: 40px;
+	height: $cellHeight;
+	line-height: $cellHeight;
 	.playerName {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 	@import './matchCell.scss';
 }

@@ -1,18 +1,29 @@
 .matchTable {
     border: 1px;
     display: table;
+    $cellWidth: 150px;
+    $cellHeight: 40px;
     .cell {
         display: table-cell;
         border: 1px solid black;
-        min-width: 50px;
-        height: 40px;
-        line-height: 40px;
+        width: $cellWidth;
+        min-width: $cellWidth;
+        max-width: $cellWidth;
+        min-height: $cellHeight;
+        max-height: $cellHeight;
+        line-height: $cellHeight;
       }
     .emptyCell {
       background-color: gray;
     }
     .headerRow {
-     
+      height: $cellHeight;
+      .headerPlayerName {
+        height: $cellHeight;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
     @import './matchRow.scss';
   } 
