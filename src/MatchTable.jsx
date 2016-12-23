@@ -46,7 +46,7 @@ export default class MatchTable extends React.PureComponent {
 				{
 					playerIdList.map((playerId) => {
 						return (
-							<div className="HeaderPlayerName cell" key={playerId}>
+							<div className="headerPlayerName cell" key={playerId}>
 								{playerMap.getIn([playerId, 'name'])}
 							</div>
 						);
