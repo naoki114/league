@@ -14,15 +14,5 @@
     .headerRow {
      
     }
-    .row {
-      float: none;
-      height: 40px;
-      line-height: 40px;
-      .playerName {
-       }
-      
-      .matchCell {
-      	background-color: white;
-      }
-    }
+    @import './matchRow.scss';
   } 

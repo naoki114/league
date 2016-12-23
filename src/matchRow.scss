@@ -1,0 +1,8 @@
+.row {
+	float: none;
+	height: 40px;
+	line-height: 40px;
+	.playerName {
+	}
+	@import './matchCell.scss';
+}
