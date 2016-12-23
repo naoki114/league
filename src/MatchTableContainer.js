@@ -4,12 +4,11 @@ import MatchTableActions from './MatchTableActions.js';
 import matchTableActionTypes from './matchTableActionTypes.js';
 function mapStateToProps(state) {
     return {
-    	players: state.get('players'),
-    	matchResults: state.get('matchResults'),
-        tmpPlayername: state.get('tmpPlayerName'),
+    	players: state.matchTable.get('players'),
+    	matchResults: state.matchTable.get('matchResults'),
+        tmpPlayername: state.matchTable.get('tmpPlayerName'),
     };
 }
-
 
 function mapDispatchToEvents(dispatch) {
     return {
@@ -26,9 +25,9 @@ function mapDispatchToEvents(dispatch) {
     };
 }
 
-const RootContainer = connect(
+const MatchTableContainer = connect(
     mapStateToProps,
     mapDispatchToEvents
 )(MatrchTable);
 
-export default RootContainer;
+export default MatchTableContainer;

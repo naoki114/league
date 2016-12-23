@@ -14,8 +14,6 @@ export default class MatchTable extends React.PureComponent {
 			onChangeTmpPlayerName: React.PropTypes.func.isRequired,
 		};
 	}
-	
-
 
 	renderButtonGroup(tmpPlayerName) {
 		const onClickAddPlayerButton = this.props.onClickAddPlayerButton;

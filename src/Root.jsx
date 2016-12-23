@@ -1,19 +1,15 @@
 import React from 'react';
 import Immutable from 'immutable';
-import MatchTable from './MatchTable.jsx';
+import MatchTableContainer from './MatchTableContainer.js';
 
 export default class Root extends React.PureComponent {
 	static get propTypes () {
-		return {
-			matchResults: React.PropTypes.instanceOf(Immutable.Map).isRequired,
-		}
+		return {};
 	}
-    componentDidMount() {}
 
     render(){
-    	const matchResults = this.props.matchResults;
         return (
-        	<MatchTable matchResults={matchResults} />
+        	<MatchTableContainer />
         );
     }
 }

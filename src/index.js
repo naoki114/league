@@ -4,12 +4,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider,connect } from 'react-redux';
 import configureStore from './configureStore.js';
-//import RootContainer from './RootContainer.js';
 import Root from './Root.jsx';
 import rootReducer from './rootReducer.js';
 import logo from './logo.svg';
 import './App.scss';
-import RootContainer from './RootContainer.js';
 
 
 function main() {
@@ -17,10 +15,10 @@ function main() {
 
     ReactDOM.render(
         <Provider store={store}>
-            <RootContainer />
+            <Root />
         </Provider>
         ,document.getElementById('root')
-    )
+    );
 }
 
 (function iif() {
