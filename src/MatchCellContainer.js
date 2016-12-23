@@ -20,10 +20,10 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToEvents(dispatch) {
     return {
-        onClickMatchCell: (leftPlayerId, rightPlayerId) => {
+        onClickInputButton: (leftPlayerId, rightPlayerId) => {
             dispatch(MatchCellActions.openEditor(leftPlayerId, rightPlayerId));
         },
-        onMouseLeaveMatchCell: () => {
+        onClickOkButton: () => {
             dispatch(MatchCellActions.closeEditor());
         }
     };

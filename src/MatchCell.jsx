@@ -11,8 +11,8 @@ export default class MatchCell extends React.PureComponent{
 			rightPlayerId: React.PropTypes.string.isRequired,
 			editingLeftPlayerId: React.PropTypes.string,
 			editingRightPlayerId: React.PropTypes.string,
-			onClickMatchCell: React.PropTypes.func.isRequired,
-			onMouseLeaveMatchCell: React.PropTypes.func.isRequired,
+			onClickInputButton: React.PropTypes.func.isRequired,
+			onClickOkButton: React.PropTypes.func.isRequired,
 		};
 	}
 	renderEditButton(leftPlayerId, rightPlayerId){
@@ -20,7 +20,7 @@ export default class MatchCell extends React.PureComponent{
 			<button
 				className="editButton"
 				onClick={() => {
-					this.props.onClickMatchCell(leftPlayerId, rightPlayerId);
+					this.props.onClickInputButton(leftPlayerId, rightPlayerId);
 				}}
 			>
 				入力
@@ -45,7 +45,7 @@ export default class MatchCell extends React.PureComponent{
 						/>
 						<button
 							className="okButton"
-							onClick={() => {this.props.onMouseLeaveMatchCell();}}
+							onClick={() => {this.props.onClickOkButton();}}
 						>
 							OK
 						</button>
