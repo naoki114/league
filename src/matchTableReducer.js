@@ -22,7 +22,6 @@ function createEmptyResult(primaryPlayerId, playerIdList){
 		if(primaryPlayerId !== playerId){
 			const newId = primaryPlayerId + '-' + playerId;
 			matchResults[newId] = {};
-			matchResults[newId].winner =  null;
 			matchResults[newId][primaryPlayerId] = {point:0};
 			matchResults[newId][playerId] = {point:0};	
 		}
@@ -83,7 +82,6 @@ function calcTotalResult(state){
         });
         return new Immutable.Map({playerId ,winCount, winPoint});
     });
-    console.log(totalResultsMap.toJS());
     state.setIn(['totalResults', 'byId', totalResultsMap]);
 }
 
