@@ -29,6 +29,17 @@ export default class MatchCell extends React.PureComponent{
 			</button>
 		)
 	}
+
+	renderCell(resultString, leftPlayerId, rightPlayerId){
+		return (
+			<div className="innerMatchCell">
+				<div className="result">{resultString}	</div>
+				{this.renderEditButton(leftPlayerId, rightPlayerId)}
+			</div>
+		);
+	}
+
+
 	renderEditor(
 		isOpenEditor,
 		matchResultId,
@@ -103,8 +114,7 @@ export default class MatchCell extends React.PureComponent{
 				className="matchCell cell"
 				key={rightPlayerId}
 			>
-				{resultString}
-				{this.renderEditButton(leftPlayerId, rightPlayerId)}
+				{this.renderCell(resultString, leftPlayerId, rightPlayerId)}
 				{this.renderEditor(
 					isOpenEditor,
 					matchResultId,

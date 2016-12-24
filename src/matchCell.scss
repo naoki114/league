@@ -2,11 +2,24 @@
 	position: relative;
 	background-color: white;
 	outline: none;
+	.innerMatchCell {
+		width: $cellWidth;
+		height: $cellHeight;
+		.result {
+			display: inline-block;
+			margin-left: 20px;
+			margin-right: 20px;
+			width: 50px;
+		}
+		.editButton {
+			display: inline-block;
+		}
+	}
 	.matchEditor {
 		position: absolute;
 		top: 0px;
-		left: #{$cellWidth - 30px};
-		width: $cellWidth;
+		left: #{$cellWidth - 80px};
+		width: 200px;
 		height: $cellHeight;
 		background-color: #336699;
 		border: none;
