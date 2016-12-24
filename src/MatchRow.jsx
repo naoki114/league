@@ -24,7 +24,7 @@ export default class MatchRow extends React.PureComponent{
 	 * @param leftPlayerId 左側に表示するポイントのプレイヤーId
 	 * @param rightPlayerId 右側に表示するポイントのプレイヤーId
 	 */
-	renderCell (matchResultId, matchResult, leftPlayerId, rightPlayerId) {
+	renderMatchCell (matchResultId, matchResult, leftPlayerId, rightPlayerId) {
 		const onChangeLeftPlayerPoint = this.props.onChangeLeftPlayerPoint;
 		const onChangeRightPlayerPoint = this.props.onChangeRightPlayerPoint;
 		return (
@@ -39,7 +39,7 @@ export default class MatchRow extends React.PureComponent{
 		);
 	}
 	
-	renderCells(playerId, playerIdList, playerMap, matchResultMap) {
+	renderMatchCells(playerId, playerIdList, playerMap, matchResultMap) {
 	 	return playerIdList.map((innerPlayerId) => {
  			if(innerPlayerId !== playerId) {
  				let matchResultId = [playerId, innerPlayerId].join('-');
@@ -48,7 +48,7 @@ export default class MatchRow extends React.PureComponent{
 	 				matchResultId = [innerPlayerId, playerId].join('-');
 	 				matchResult = matchResultMap.get(matchResultId);
 	 			}
-	 			return this.renderCell(matchResultId, matchResult, playerId, innerPlayerId);
+	 			return this.renderMatchCell(matchResultId, matchResult, playerId, innerPlayerId);
  			}
  			return (
  				<div className="emptyCell cell" key={innerPlayerId}/>
@@ -72,7 +72,7 @@ export default class MatchRow extends React.PureComponent{
 				<div className="playerName cell">
 						{playerName}
 				</div>
-			 	{this.renderCells(playerId, playerIdList, playerMap, matchResultMap)}
+			 	{this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
 			</div>
 		);
 	}
