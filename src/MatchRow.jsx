@@ -13,6 +13,7 @@ export default class MatchRow extends React.PureComponent{
 			playerIdList: React.PropTypes.instanceOf(Immutable.List).isRequired,
 			playerMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			matchResultMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+			totalResult: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
 			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
 		};
@@ -56,6 +57,23 @@ export default class MatchRow extends React.PureComponent{
  		})
 	}
 
+	renderTotalResultCell(totalResult){
+		if(totalResult === undefined) {
+			return null;
+		}
+		const winCount = totalResult.get('winCount');
+		const winPoint = totalResult.get('winPoint');
+		return (
+			<div className="resultCell">
+				<div className="winCount">
+					{winCount}
+				</div>
+				<div className="winPoint">
+					{winPoint}
+				</div>
+			</div>
+		)
+	}
 
 	render() {
 
@@ -63,7 +81,8 @@ export default class MatchRow extends React.PureComponent{
 			playerId,
 			playerIdList,
 			playerMap,
-			matchResultMap
+			matchResultMap,
+			totalResult
 		} = this.props;
 
 		const playerName = playerMap.getIn([playerId, 'name']);
@@ -73,6 +92,7 @@ export default class MatchRow extends React.PureComponent{
 						{playerName}
 				</div>
 			 	{this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
+			 	{this.renderTotalResultCell(totalResult)}
 			</div>
 		);
 	}

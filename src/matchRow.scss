@@ -7,5 +7,18 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
+	.resultCell {
+		display: table-cell;
+		.winCount {
+			display: table-cell;
+			width: 50px;
+			height: 40px;
+		}
+		.winPoint {
+			display: table-cell;
+			width: 50px;
+			height: 40px;
+		}
+	}
 	@import './matchCell.scss';
 }

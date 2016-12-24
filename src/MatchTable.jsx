@@ -9,6 +9,7 @@ export default class MatchTable extends React.PureComponent {
 		return {
 			players: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			matchResults: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+			totalResults: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			tmpPlayerName: React.PropTypes.string,
 			onClickAddPlayerButton: React.PropTypes.func.isRequired,
 			onChangeTmpPlayerName: React.PropTypes.func.isRequired,
@@ -67,20 +68,23 @@ export default class MatchTable extends React.PureComponent {
 		);
 	}
 
-	renderRows(players, matchResults){
+	renderRows(players, matchResults, totalResults){
 		const playerIdList = players.get('idList');
 		const playerMap =  players.get('byId');
 		const matchResultMap = matchResults.get('byId');
+		const totalResultMap = totalResults.get('byId');
 		const onChangeLeftPlayerPoint = this.props.onChangeLeftPlayerPoint;
 		const onChangeRightPlayerPoint = this.props.onChangeRightPlayerPoint;
 		// 行を生成
 		return playerIdList.map((playerId) => {
+			const totalResult = totalResultMap.get(playerId);
 			return (
 				<MatchRow 
 					playerId={playerId}
 					playerIdList={playerIdList}
 					playerMap={playerMap}
 					matchResultMap={matchResultMap}
+					totalResult={totalResult}
 					key={playerId}
 					onChangeLeftPlayerPoint={onChangeLeftPlayerPoint}
 					onChangeRightPlayerPoint={onChangeRightPlayerPoint}
@@ -92,17 +96,18 @@ export default class MatchTable extends React.PureComponent {
 	render() {
 		const {
 			matchResults,
+			totalResults,
 			players,
 			tmpPlayerName
 		} = this.props;
-		
 		return (
 			<div className="matchTable">
 				{this.renderButtonGroup(tmpPlayerName)}
 				{this.renderHeaderRow(players)}
 				{this.renderRows(
 					players,
-					matchResults
+					matchResults,
+					totalResults
 				)}			
 			</div>
 		);
