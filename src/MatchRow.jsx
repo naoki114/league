@@ -39,6 +39,24 @@ export default class MatchRow extends React.PureComponent{
 		);
 	}
 	
+	renderCells(playerId, playerIdList, playerMap, matchResultMap) {
+	 	return playerIdList.map((innerPlayerId) => {
+ 			if(innerPlayerId !== playerId) {
+ 				let matchResultId = [playerId, innerPlayerId].join('-');
+	 			let matchResult = matchResultMap.get(matchResultId);
+	 			if(matchResult === undefined) {
+	 				matchResultId = [innerPlayerId, playerId].join('-');
+	 				matchResult = matchResultMap.get(matchResultId);
+	 			}
+	 			return this.renderCell(matchResultId, matchResult, playerId, innerPlayerId);
+ 			}
+ 			return (
+ 				<div className="emptyCell cell" key={innerPlayerId}/>
+ 			)
+ 		})
+	}
+
+
 	render() {
 
 		const {
@@ -54,22 +72,7 @@ export default class MatchRow extends React.PureComponent{
 				<div className="playerName cell">
 						{playerName}
 				</div>
-			 	{
-			 		playerIdList.map((innerPlayerId) => {
-			 			if(innerPlayerId !== playerId) {
-			 				let matchResultId = [playerId, innerPlayerId].join('-');
-				 			let matchResult = matchResultMap.get(matchResultId);
-				 			if(matchResult === undefined) {
-				 				matchResultId = [innerPlayerId, playerId].join('-');
-				 				matchResult = matchResultMap.get(matchResultId);
-				 			}
-				 			return this.renderCell(matchResultId, matchResult, playerId, innerPlayerId);
-			 			}
-			 			return (
-			 				<div className="emptyCell cell" key={innerPlayerId}/>
-			 			)
-			 		})
-			 	}
+			 	{this.renderCells(playerId, playerIdList, playerMap, matchResultMap)}
 			</div>
 		);
 	}
