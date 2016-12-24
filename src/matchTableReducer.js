@@ -58,31 +58,35 @@ function calcTotalResult(state){
     const playerIdList = players.get('idList');
     const playerMap = players.get('byId');
     const matchResultsMap = state.getIn(['matchResults', 'byId']);
-    // 勝ち数計算
-    const totalResultsMap = playerIdList.map((playerId) => {
-        let winCount = 0;
-        let winPoint = 0;
-        playerIdList.forEach((anotherPlayerId) => {
-            if (playerId !== anotherPlayerId) {
-                let matchResultId = [playerId, anotherPlayerId].join('-');
-                console.log(matchResultId);
-                let matchResult = matchResultsMap.get(matchResultId);
-                if(matchResult === undefined) {
-                    matchResultId = [anotherPlayerId, playerId].join('-');
-                    matchResult = matchResultsMap.get(matchResultId);
+    return state.withMutations((ctx) => {
+        // 勝ち数計算
+        playerIdList.forEach((playerId) => {
+            let winCount = 0;
+            let winPoint = 0;
+            playerIdList.forEach((anotherPlayerId) => {
+                if (playerId !== anotherPlayerId) {
+                    let matchResultId = [playerId, anotherPlayerId].join('-');
+                    console.log(matchResultId);
+                    let matchResult = matchResultsMap.get(matchResultId);
+                    if(matchResult === undefined) {
+                        matchResultId = [anotherPlayerId, playerId].join('-');
+                        matchResult = matchResultsMap.get(matchResultId);
+                    }
+                    const playerPoint = matchResult.getIn([playerId, 'point']);
+                    const anotherPlayerPoint = matchResult.getIn([anotherPlayerId, 'point']);
+                    if(playerPoint > anotherPlayerPoint){
+                        winCount++;
+                    }
+                    winPoint += playerPoint;
+                    console.log('a', winPoint);
+                    winPoint -= anotherPlayerPoint;
+                    console.log('b', winPoint);
                 }
-                const playerPoint = matchResult.getIn([playerId, 'point']);
-                const anotherPlayerPoint = matchResult.getIn([anotherPlayerId, 'point']);
-                if(playerPoint > anotherPlayerPoint){
-                    winCount++;
-                }
-                winPoint += playerPoint;
-                winPoint -= anotherPlayerPoint;
-            }
+            });
+            const totalResult = new Immutable.Map({winCount, winPoint});
+            ctx.setIn(['totalResults', 'byId', playerId], totalResult);
         });
-        return new Immutable.Map({playerId ,winCount, winPoint});
     });
-    state.setIn(['totalResults', 'byId', totalResultsMap]);
 }
 
 export default function matchTableReducer(state = initialState, action) {
@@ -96,13 +100,13 @@ export default function matchTableReducer(state = initialState, action) {
     case matchTableActionTypes.CHANGE_LEFT_PLAYER_POINT: {
         return state.setIn(
             ['matchResults', 'byId', action.matchResultId, action.leftPlayerId, 'point'],
-            action.leftPlayerPoint
+            Number(action.leftPlayerPoint)
         );
     }
     case matchTableActionTypes.CHANGE_RIGHT_PLAYER_POINT: {
         return state.setIn(
             ['matchResults', 'byId', action.matchResultId, action.rightPlayerId, 'point'],
-            action.rightPlayerPoint
+            Number(action.rightPlayerPoint)
         );
     }
     case matchTableActionTypes.CALC_TOTAL_RESULTS: {
