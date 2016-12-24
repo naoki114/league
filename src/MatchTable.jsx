@@ -14,12 +14,14 @@ export default class MatchTable extends React.PureComponent {
 			onChangeTmpPlayerName: React.PropTypes.func.isRequired,
 			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
 			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
+			onClickCalcButton: React.PropTypes.func.isRequire,
 		};
 	}
 
 	renderButtonGroup(tmpPlayerName) {
 		const onClickAddPlayerButton = this.props.onClickAddPlayerButton;
 		const onChangeTmpPlayerName = this.props.onChangeTmpPlayerName;
+		const onClickCalcButton = this.props.onClickCalcButton;
 		return (
 			<div className="buttonGroup">
 				<button
@@ -34,6 +36,13 @@ export default class MatchTable extends React.PureComponent {
 					value={tmpPlayerName}
 					onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
 				/>
+				<button
+					onClick={() => {
+						onClickCalcButton();
+					}}
+				>
+				計算
+				</button>
 			</div>
 		)
 	}

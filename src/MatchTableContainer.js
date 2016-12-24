@@ -49,6 +49,9 @@ function mapDispatchToEvents(dispatch) {
                     rightPlayerPoint
                 )
             )
+        },
+        onClickCalcButton: () => {
+            dispatch(MatchTableActions.calcTotalResults())
         }
     };
 }

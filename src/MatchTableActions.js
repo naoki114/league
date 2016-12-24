@@ -39,4 +39,10 @@ export default class MatchTableActions {
 			rightPlayerPoint,
 		})
 	}
+
+	static calcTotalResults() {
+		return ({
+			type: matchTableActionTypes.CALC_TOTAL_RESULTS,
+		})
+	}
 }
