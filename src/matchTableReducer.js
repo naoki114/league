@@ -1,8 +1,10 @@
 import Immutable from 'immutable';
 import matchTableActionTypes from './matchTableActionTypes.js';
 
-const initialState = Immutable.fromJS({
-	players: {	
+const initialState = localStorage.getItem("tmp") !== null ?
+ Immutable.fromJS(JSON.parse(localStorage.getItem("tmp")))
+ : Immutable.fromJS({
+	players: {
 		maxId: 0,
 		idList: [],
 		byId: {},
