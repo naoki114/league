@@ -6,9 +6,9 @@ export default class Root extends React.PureComponent {
 		return {};
 	}
 
-    render(){
-        return (
-        	<MatchTableContainer />
-        );
-    }
+  render(){
+      return (
+      	<MatchTableContainer />
+      );
+  }
 }
