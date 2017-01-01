@@ -10,9 +10,9 @@ const initialState = Immutable.fromJS({
 	matchResults: {
 		byId: {},
 	},
-    totalResults: {
-        byId: {},  
-    },
+  totalResults: {
+      byId: {},
+  },
 	tmpPlayerName: "",
 });
 
@@ -23,10 +23,10 @@ function createEmptyResult(primaryPlayerId, playerIdList){
 			const newId = primaryPlayerId + '-' + playerId;
 			matchResults[newId] = {};
 			matchResults[newId][primaryPlayerId] = {point:0};
-			matchResults[newId][playerId] = {point:0};	
+			matchResults[newId][playerId] = {point:0};
 		}
 	});
-	return matchResults;
+	return Immutable.fromJS(matchResults);
 }
 
 function addPlayer(state, action){
@@ -53,10 +53,9 @@ function addPlayer(state, action){
     });
 }
 
-function calcTotalResult(state){
+function calcTotalResultPoint(state){
     const players = state.get("players");
     const playerIdList = players.get('idList');
-    const playerMap = players.get('byId');
     const matchResultsMap = state.getIn(['matchResults', 'byId']);
     return state.withMutations((ctx) => {
         // 勝ち数計算
@@ -66,7 +65,6 @@ function calcTotalResult(state){
             playerIdList.forEach((anotherPlayerId) => {
                 if (playerId !== anotherPlayerId) {
                     let matchResultId = [playerId, anotherPlayerId].join('-');
-                    console.log(matchResultId);
                     let matchResult = matchResultsMap.get(matchResultId);
                     if(matchResult === undefined) {
                         matchResultId = [anotherPlayerId, playerId].join('-');
@@ -78,9 +76,7 @@ function calcTotalResult(state){
                         winCount++;
                     }
                     winPoint += playerPoint;
-                    console.log('a', winPoint);
                     winPoint -= anotherPlayerPoint;
-                    console.log('b', winPoint);
                 }
             });
             const totalResult = new Immutable.Map({winCount, winPoint});
