@@ -14,6 +14,7 @@ const localStorageMiddleware = store => next => action => {
               store.getState().matchTable.toJSON()
           )
       );
+      break;
     default:
       return result;
     }

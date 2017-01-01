@@ -36,6 +36,7 @@ export default class MatchRow extends React.PureComponent{
 				rightPlayerId={rightPlayerId}
 				onChangeLeftPlayerPoint={onChangeLeftPlayerPoint}
 				onChangeRightPlayerPoint={onChangeRightPlayerPoint}
+				key={matchResultId}
 			/>
 		);
 	}

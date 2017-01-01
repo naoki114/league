@@ -16,7 +16,7 @@ export default class MatchTable extends React.PureComponent {
 			onChangeTmpPlayerName: React.PropTypes.func.isRequired,
 			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
 			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
-			onClickCalcButton: React.PropTypes.func.isRequire,
+			onClickCalcButton: React.PropTypes.func.isRequired,
 		};
 	}
 
