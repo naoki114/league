@@ -13,7 +13,7 @@ export default class MatchRow extends React.PureComponent{
 			playerIdList: React.PropTypes.instanceOf(Immutable.List).isRequired,
 			playerMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			matchResultMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
-			totalResult: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+			totalResult: React.PropTypes.instanceOf(Immutable.Map),
 			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
 			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
 		};
