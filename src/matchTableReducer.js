@@ -89,13 +89,46 @@ function calcTotalResult(state){
     });
 }
 
+function loadTmpState(state) {
+	state.withMutations((ctx) => {
+		if(localStorage.getItem("tmp_players") !== null) {
+			ctx.set(
+				'players' ,
+				Immutable.fromJS(
+					JSON.parse(
+						localStorage.getItem("tmp_players")
+					)
+				)
+			);
+		}
+		if(localStorage.getItem("tmp_matchResults") !== null) {
+			ctx.set(
+				'matchResults' ,
+				Immutable.fromJS(
+					JSON.parse(
+						localStorage.getItem("tmp_matchResults")
+					)
+				)
+			);
+		}
+		if(localStorage.getItem("tmp_totalResults") !== null) {
+			ctx.set(
+				'totalResults' ,
+				Immutable.fromJS(
+					JSON.parse(
+						localStorage.getItem("tmp_totalResults")
+					)
+				)
+			);
+		}
+	});
+	return state;
+}
+
 export default function matchTableReducer(state = initialState, action) {
     switch (action.type) {
     case matchTableActionTypes.LOAD_TMP_STATE: {
-      if(localStorage.getItem("tmp") !== null) {
-        return Immutable.fromJS(JSON.parse(localStorage.getItem("tmp")))
-      }
-      return state;
+			return loadTmpState(state);
     }
     case matchTableActionTypes.ADD_PLAYER: {
     	return addPlayer(state,action);

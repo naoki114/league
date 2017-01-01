@@ -9,9 +9,21 @@ const localStorageMiddleware = store => next => action => {
     case matchTableActionTypes.CALC_TOTAL_RESULTS:
     case matchTableActionTypes.ADD_PLAYER:
       localStorage.setItem(
-          "tmp",
+          "tmp_players",
           JSON.stringify(
-              store.getState().matchTable.toJSON()
+              store.getState().matchTable.get("players").toJS()
+          )
+      );
+      localStorage.setItem(
+          "tmp_matchResults",
+          JSON.stringify(
+              store.getState().matchTable.get("matchResults").toJS()
+          )
+      );
+      localStorage.setItem(
+          "tmp_totalResults",
+          JSON.stringify(
+              store.getState().matchTable.get("totalResults").toJS()
           )
       );
       break;
