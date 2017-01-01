@@ -1,6 +1,13 @@
 import matchTableActionTypes from './matchTableActionTypes.js';
 
 export default class MatchTableActions {
+
+	static loadTmpState(){
+		return ({
+			type: matchTableActionTypes.LOAD_TMP_STATE,
+		});
+	}
+
 	static addPlayer(){
 		return ({
 			type: matchTableActionTypes.ADD_PLAYER,

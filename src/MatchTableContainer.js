@@ -12,6 +12,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToEvents(dispatch) {
     return {
+      onMountMatchTable: () => {
+        dispatch(MatchTableActions.loadTmpState());
+      },
     	onClickAddPlayerButton: () => {
     		dispatch(
     			MatchTableActions.addPlayer()

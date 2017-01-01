@@ -11,12 +11,17 @@ export default class MatchTable extends React.PureComponent {
 			matchResults: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			totalResults: React.PropTypes.instanceOf(Immutable.Map).isRequired,
 			tmpPlayerName: React.PropTypes.string,
+			onMountMatchTable: React.PropTypes.func.isRequired,
 			onClickAddPlayerButton: React.PropTypes.func.isRequired,
 			onChangeTmpPlayerName: React.PropTypes.func.isRequired,
 			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
 			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
 			onClickCalcButton: React.PropTypes.func.isRequire,
 		};
+	}
+
+	componentDidMount(){
+			this.props.onMountMatchTable();
 	}
 
 	renderButtonGroup(tmpPlayerName) {

@@ -1,9 +1,7 @@
 import Immutable from 'immutable';
 import matchTableActionTypes from './matchTableActionTypes.js';
 
-const initialState = localStorage.getItem("tmp") !== null ?
- Immutable.fromJS(JSON.parse(localStorage.getItem("tmp")))
- : Immutable.fromJS({
+const initialState = Immutable.fromJS({
 	players: {
 		maxId: 0,
 		idList: [],
@@ -93,6 +91,12 @@ function calcTotalResult(state){
 
 export default function matchTableReducer(state = initialState, action) {
     switch (action.type) {
+    case matchTableActionTypes.LOAD_TMP_STATE: {
+      if(localStorage.getItem("tmp") !== null) {
+        return Immutable.fromJS(JSON.parse(localStorage.getItem("tmp")))
+      }
+      return state;
+    }
     case matchTableActionTypes.ADD_PLAYER: {
     	return addPlayer(state,action);
     }
