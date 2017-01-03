@@ -105,7 +105,7 @@ function calcTotalResultRanking(state) {
 
 	// sort key of map by winPoint
   let playerPointList = ImmutablePlayerPointMap.keySeq().toArray().sort((a, b) => {
-		return a < b;
+		return Number(a) < Number(b);
 	});
 
 	// set rank
