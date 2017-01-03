@@ -123,7 +123,7 @@ function calcTotalResultRanking(state) {
 }
 
 function loadTmpState(state) {
-	state.withMutations((ctx) => {
+	return state.withMutations((ctx) => {
 		if(localStorage.getItem("tmp_players") !== null) {
 			ctx.set(
 				'players' ,
@@ -155,7 +155,6 @@ function loadTmpState(state) {
 			);
 		}
 	});
-	return state;
 }
 
 export default function matchTableReducer(state = initialState, action) {
