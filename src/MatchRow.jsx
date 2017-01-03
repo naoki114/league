@@ -96,7 +96,7 @@ export default class MatchRow extends React.PureComponent{
 						{playerName}
 				</div>
 			 	{this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
-			 	{this.renderTotalResultCell(totalResult)}
+			 	{this.renderTotalResultCell(totalResult, playerId)}
 			</div>
 		);
 	}
