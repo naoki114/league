@@ -79,10 +79,47 @@ function calcTotalResultPoint(state){
                     winPoint -= anotherPlayerPoint;
                 }
             });
-            const totalResult = new Immutable.Map({winCount, winPoint});
+            const totalResult = new Immutable.Map({winCount, winPoint, playerId});
             ctx.setIn(['totalResults', 'byId', playerId], totalResult);
         });
     });
+}
+
+function calcTotalResultRanking(state) {
+	const totalResultsMap = state.getIn(['totalResults', 'byId']);
+	const playerPointMap = {};
+
+	// create Map (key=winPoint, value=playerId)
+	totalResultsMap.forEach((totalResult) => {
+		const playerId = totalResult.get('playerId');
+		const winPoint = totalResult.get('winPoint');
+		let sameWinPointPlayers = playerPointMap[winPoint];
+		if(sameWinPointPlayers === undefined || sameWinPointPlayers === null) {
+			playerPointMap[winPoint] = [playerId];
+		} else {
+			sameWinPointPlayers.push(playerId);
+		}
+
+	});
+	const ImmutablePlayerPointMap = new Immutable.Map(playerPointMap);
+
+	// sort key of map by winPoint
+  let playerPointList = ImmutablePlayerPointMap.keySeq().toArray().sort((a, b) => {
+		return a < b;
+	});
+
+	// set rank
+	let rankNum = 1;
+	return state.withMutations((ctx) => {
+		playerPointList.forEach((winPoint) => {
+		 const samePointPlayers = ImmutablePlayerPointMap.get(winPoint);
+		 samePointPlayers.forEach((playerId) => {
+				 return ctx.setIn(['totalResults', 'byId', playerId, 'rank'], rankNum);
+		 });
+		rankNum ++;
+		});
+	});
+
 }
 
 function loadTmpState(state) {
@@ -145,7 +182,8 @@ export default function matchTableReducer(state = initialState, action) {
         );
     }
     case matchTableActionTypes.CALC_TOTAL_RESULTS: {
-        return calcTotalResult(state);
+        const resultWithPoint = calcTotalResultPoint(state);
+        return calcTotalResultRanking(resultWithPoint);
     }
     default:
         return state;

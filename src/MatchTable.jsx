@@ -69,6 +69,9 @@ export default class MatchTable extends React.PureComponent {
 						);
 					})
 				}
+				<div className="result cell">勝ち数</div>
+				<div className="result cell">勝ち点</div>
+				<div className="result cell">順位</div>
 			</div>
 		);
 	}

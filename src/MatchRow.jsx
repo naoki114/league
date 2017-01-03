@@ -58,26 +58,29 @@ export default class MatchRow extends React.PureComponent{
  		})
 	}
 
-	renderTotalResultCell(totalResult){
+	renderTotalResultCell(totalResult, playerId){
 		if(totalResult === undefined) {
 			return null;
 		}
 		const winCount = totalResult.get('winCount');
 		const winPoint = totalResult.get('winPoint');
+		const rank = totalResult.get('rank');
 		return (
-			<div className="resultCell">
-				<div className="winCount">
+			<div className="totalResult">
+				<div className="result cell">
 					{winCount}
 				</div>
-				<div className="winPoint">
+				<div className="result cell">
 					{winPoint}
+				</div>
+				<div className="result cell">
+					{rank}
 				</div>
 			</div>
 		)
 	}
 
 	render() {
-
 		const {
 			playerId,
 			playerIdList,
