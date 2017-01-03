@@ -5,8 +5,8 @@ function mapStateToProps(state) {
     return {
     	players: state.matchTable.get('players'),
     	matchResults: state.matchTable.get('matchResults'),
-        totalResults: state.matchTable.get('totalResults'),
-        tmpPlayerName: state.matchTable.get('tmpPlayerName'),
+      totalResults: state.matchTable.get('totalResults'),
+      tmpPlayerName: state.matchTable.get('tmpPlayerName'),
     };
 }
 
