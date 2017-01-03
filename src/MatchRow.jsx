@@ -58,15 +58,25 @@ export default class MatchRow extends React.PureComponent{
  		})
 	}
 
-	renderTotalResultCell(totalResult, playerId){
-		if(totalResult === undefined) {
-			return null;
-		}
-		const winCount = totalResult.get('winCount');
-		const winPoint = totalResult.get('winPoint');
-		const rank = totalResult.get('rank');
+	render() {
+		const {
+			playerId,
+			playerIdList,
+			playerMap,
+			matchResultMap,
+			totalResult
+		} = this.props;
+		const isCalced = totalResult !== undefined;
+		const playerName = playerMap.getIn([playerId, 'name']);
+		const winCount =  isCalced ? totalResult.get('winCount') : 0;
+		const winPoint =  isCalced ? totalResult.get('winPoint'): 0;
+		const rank = isCalced ? totalResult.get('rank'): 0;
 		return (
-			<div className="totalResult">
+			<div className="row" key={playerId}>
+				<div className="playerName cell">
+						{playerName}
+				</div>
+			 	{this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
 				<div className="result cell">
 					{winCount}
 				</div>
@@ -76,27 +86,6 @@ export default class MatchRow extends React.PureComponent{
 				<div className="result cell">
 					{rank}
 				</div>
-			</div>
-		)
-	}
-
-	render() {
-		const {
-			playerId,
-			playerIdList,
-			playerMap,
-			matchResultMap,
-			totalResult
-		} = this.props;
-
-		const playerName = playerMap.getIn([playerId, 'name']);
-		return (
-			<div className="row" key={playerId}>
-				<div className="playerName cell">
-						{playerName}
-				</div>
-			 	{this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
-			 	{this.renderTotalResultCell(totalResult, playerId)}
 			</div>
 		);
 	}
