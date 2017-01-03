@@ -7,9 +7,5 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
-	.totalResult {
-		width: auto;
-		display: table-cell;
-	}
 	@import './matchCell.scss';
 }
