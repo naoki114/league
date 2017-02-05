@@ -30,19 +30,21 @@ export default class MatchTable extends React.PureComponent {
 		const onClickCalcButton = this.props.onClickCalcButton;
 		return (
 			<div className="buttonGroup">
+				<input
+					className="playerNameField"
+					type="text"
+					value={tmpPlayerName}
+					placeholder="参加者名を入力"
+					onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
+				/>
 				<button
 					className="addPlayerButton"
 					onClick={onClickAddPlayerButton}
 				>
 					参加者追加
 				</button>
-				<input
-					className="playerNameField"
-					type="text"
-					value={tmpPlayerName}
-					onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
-				/>
 				<button
+					className="calcButton"
 					onClick={() => {
 						onClickCalcButton();
 					}}
