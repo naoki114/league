@@ -1,11 +1,14 @@
 .matchTable {
     border: 1px;
     display: table;
+    width: 100%;
+    height: 100%;
     $cellWidth: 150px;
     $cellHeight: 40px;
     .cell {
         display: table-cell;
-        border: 1px solid black;
+        border-style: solid;
+        border-width: 0px 1px 1px 0px;
         width: $cellWidth;
         min-width: $cellWidth;
         max-width: $cellWidth;
@@ -25,12 +28,74 @@
     }
     .headerRow {
       height: $cellHeight;
+
       .headerPlayerName {
         height: $cellHeight;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+      > .cell {
+        border-top-width: 1px;
+        &:first-child {
+          border-left-width: 1px;
+        }
+      }
+    }
+
+    .playerNameField {
+      font-size: 15px;
+      width: 150px;
+      height: 25px;
+      outline: none;
+      border-radius: 5px;
+      border-width: 1px;
+      border-style: solid;
+      background-color: lightgray;
+    }
+
+    .buttonGroup {
+        margin-bottom: 10px;
+        .addPlayerButton {
+          font-size: 15px;
+          width: 150px;
+          height: 30px;
+          margin-left: 5px;
+          border-radius: 5px;
+          border-style: none;
+          outline: none;
+          background-color: #0084b4;
+          color: white;
+          transition: 0.2s ease;
+          &:hover {
+            cursor: pointer;
+            background-color: #006B9B;
+          }
+          &:active {
+            background-color: #005181;
+          }
+        }
+
+        .calcButton {
+          font-size: 15px;
+          width: 150px;
+          height: 30px;
+          margin-left: 5px;
+          outline: none;
+          border-radius: 5px;
+          border-style: none;
+          outline: none;
+          background-color: #FFA500;
+          color: white;
+          transition: 0.2s ease;
+          &:hover {
+            cursor: pointer;
+            background-color: #E68C00;
+          }
+          &:active {
+            background-color: #CC7200;
+          }
+        }
     }
     @import './matchRow.scss';
-  } 
+  }

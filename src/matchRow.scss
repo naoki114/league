@@ -6,6 +6,7 @@
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+		border-left-width: 1px;
 	}
 	@import './matchCell.scss';
 }

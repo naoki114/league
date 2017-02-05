@@ -1,6 +1,5 @@
 .matchCell {
 	position: relative;
-	background-color: white;
 	outline: none;
 	.innerMatchCell {
 		width: $cellWidth;
@@ -24,7 +23,7 @@
 		background-color: #336699;
 		border: none;
 		border-radius: 5px 5px 5px 5px;
-		box-shadow: 5px 5px 5px rgba(0,0,0,0.3); 
+		box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
 		z-index: 1;
 		&:after {
 			border: 10px solid transparent;
