@@ -14,6 +14,7 @@ const initialState = Immutable.fromJS({
       byId: {},
   },
 	tmpPlayerName: "",
+	openMenu: false,
 });
 
 function createEmptyResult(primaryPlayerId, playerIdList){
@@ -184,6 +185,10 @@ export default function matchTableReducer(state = initialState, action) {
         const resultWithPoint = calcTotalResultPoint(state);
         return calcTotalResultRanking(resultWithPoint);
     }
+		case matchTableActionTypes.TOGGLE_OPEN_MENU: {
+			 const openMenu = state.get('openMenu');
+			 return state.set('openMenu', !openMenu);
+		}
     default:
         return state;
     }

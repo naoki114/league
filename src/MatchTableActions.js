@@ -52,4 +52,9 @@ export default class MatchTableActions {
 			type: matchTableActionTypes.CALC_TOTAL_RESULTS,
 		})
 	}
+	static toggleOpenMenu() {
+		return ({
+			type: matchTableActionTypes.TOGGLE_OPEN_MENU,
+		});
+	}
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
-
+import classNames from 'classnames';
 import MatchRow from './MatchRow.jsx';
 
 export default class MatchTable extends React.PureComponent {
@@ -17,40 +17,53 @@ export default class MatchTable extends React.PureComponent {
 			onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
 			onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
 			onClickCalcButton: React.PropTypes.func.isRequired,
+			onClickOpenButton: React.PropTypes.func.isRequired,
 		};
 	}
 
 	componentDidMount(){
 			this.props.onMountMatchTable();
 	}
-
-	renderButtonGroup(tmpPlayerName) {
+	renderButtonGroup(tmpPlayerName, openMenu) {
 		const onClickAddPlayerButton = this.props.onClickAddPlayerButton;
 		const onChangeTmpPlayerName = this.props.onChangeTmpPlayerName;
 		const onClickCalcButton = this.props.onClickCalcButton;
+		const inputGroupClassName = classNames({
+			inputGroup: true,
+			open: openMenu,
+		});
+		const menuButtonText = openMenu ? '閉' : '開';
 		return (
 			<div className="buttonGroup">
-				<input
-					className="playerNameField"
-					type="text"
-					value={tmpPlayerName}
-					placeholder="参加者名を入力"
-					onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
-				/>
 				<button
-					className="addPlayerButton"
-					onClick={onClickAddPlayerButton}
+					className='menuButton'
+					onClick={this.props.onClickOpenButton}
 				>
-					参加者追加
+					{menuButtonText}
 				</button>
-				<button
-					className="calcButton"
-					onClick={() => {
-						onClickCalcButton();
-					}}
-				>
-				計算
-				</button>
+				<div className={inputGroupClassName}>
+					<input
+						className="playerNameField"
+						type="text"
+						value={tmpPlayerName}
+						placeholder="参加者名を入力"
+						onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
+					/>
+					<button
+						className="addPlayerButton"
+						onClick={onClickAddPlayerButton}
+					>
+						参加者追加
+					</button>
+					<button
+						className="calcButton"
+						onClick={() => {
+							onClickCalcButton();
+						}}
+					>
+					計算
+					</button>
+				</div>
 			</div>
 		)
 	}
@@ -89,7 +102,7 @@ export default class MatchTable extends React.PureComponent {
 		return playerIdList.map((playerId) => {
 			const totalResult = totalResultMap.get(playerId);
 			return (
-				<MatchRow 
+				<MatchRow
 					playerId={playerId}
 					playerIdList={playerIdList}
 					playerMap={playerMap}
@@ -108,17 +121,18 @@ export default class MatchTable extends React.PureComponent {
 			matchResults,
 			totalResults,
 			players,
-			tmpPlayerName
+			tmpPlayerName,
+			openMenu,
 		} = this.props;
 		return (
 			<div className="matchTable">
-				{this.renderButtonGroup(tmpPlayerName)}
+				{this.renderButtonGroup(tmpPlayerName, openMenu)}
 				{this.renderHeaderRow(players)}
 				{this.renderRows(
 					players,
 					matchResults,
 					totalResults
-				)}			
+				)}
 			</div>
 		);
 	}
