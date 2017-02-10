@@ -43,57 +43,67 @@
       }
     }
 
-    .playerNameField {
-      font-size: 15px;
-      width: 150px;
-      height: 25px;
-      outline: none;
-      border-radius: 5px;
-      border-width: 1px;
-      border-style: solid;
-      background-color: lightgray;
-    }
+    > .buttonGroup{
+      display: flex;
+      > .menuButton {
+        width: 30px;
+        height: 30px;
+        flex: 0;
+      }
+      > .inputGroup {
+          opacity: 0;
+          &.open {
+            opacity: 1;
+          }
+          .playerNameField {
+            font-size: 15px;
+            width: 150px;
+            height: 25px;
+            outline: none;
+            border-radius: 5px;
+            border-width: 1px;
+            border-style: solid;
+            background-color: lightgray;
+          }
 
-    .buttonGroup {
-        margin-bottom: 10px;
-        .addPlayerButton {
-          font-size: 15px;
-          width: 150px;
-          height: 30px;
-          margin-left: 5px;
-          border-radius: 5px;
-          border-style: none;
-          outline: none;
-          background-color: #0084b4;
-          color: white;
-          transition: 0.2s ease;
-          &:hover {
-            cursor: pointer;
-            background-color: #006B9B;
+          .addPlayerButton {
+            font-size: 15px;
+            width: 150px;
+            height: 30px;
+            margin-left: 5px;
+            border-radius: 5px;
+            border-style: none;
+            outline: none;
+            background-color: #0084b4;
+            color: white;
+            transition: 0.2s ease;
+            &:hover {
+              cursor: pointer;
+              background-color: #006B9B;
+            }
+            &:active {
+              background-color: #005181;
+            }
           }
-          &:active {
-            background-color: #005181;
-          }
-        }
-
-        .calcButton {
-          font-size: 15px;
-          width: 150px;
-          height: 30px;
-          margin-left: 5px;
-          outline: none;
-          border-radius: 5px;
-          border-style: none;
-          outline: none;
-          background-color: #FFA500;
-          color: white;
-          transition: 0.2s ease;
-          &:hover {
-            cursor: pointer;
-            background-color: #E68C00;
-          }
-          &:active {
-            background-color: #CC7200;
+          .calcButton {
+            font-size: 15px;
+            width: 150px;
+            height: 30px;
+            margin-left: 5px;
+            outline: none;
+            border-radius: 5px;
+            border-style: none;
+            outline: none;
+            background-color: #FFA500;
+            color: white;
+            transition: 0.2s ease;
+            &:hover {
+              cursor: pointer;
+              background-color: #E68C00;
+            }
+            &:active {
+              background-color: #CC7200;
+            }
           }
         }
     }

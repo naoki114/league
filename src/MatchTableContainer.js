@@ -21,12 +21,12 @@ function mapDispatchToEvents(dispatch) {
     			MatchTableActions.addPlayer()
     		);
             dispatch(
-                MatchTableActions.changeTmpPlayerName("") 
+                MatchTableActions.changeTmpPlayerName("")
             )
     	},
         onChangeTmpPlayerName: (playerName) => {
             dispatch(
-                MatchTableActions.changeTmpPlayerName(playerName)  
+                MatchTableActions.changeTmpPlayerName(playerName)
             )
         },
         onChangeLeftPlayerPoint: (
@@ -57,6 +57,9 @@ function mapDispatchToEvents(dispatch) {
         },
         onClickCalcButton: () => {
             dispatch(MatchTableActions.calcTotalResults())
+        },
+        onClickOpenButton: () => {
+            dispatch(MatchTableActions.toggleOpenMenu())
         }
     };
 }
