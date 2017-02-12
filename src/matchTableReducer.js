@@ -54,6 +54,22 @@ function addPlayer(state, action){
     });
 }
 
+function deletePlayer(state, playerId) {
+    const matchResultById = state.getIn(['matchResults', 'byId']);
+    state.withMutations((ctx) => {
+        ctx.deleteIn(['players', 'byId', playerId])
+        .deleteIn(['players', 'idList', playerId])
+        .deleteId(['totalResults', 'byId', playerId]);
+        matchResultById.map((matchResult, resultId) => {
+            const idList = resultId.split('-');
+            if( idList.indexOf(playerId) !== -1 ) {
+                ctx.deleteIn(['matchResults', 'byId', resultId]);
+            }
+            return matchResult;
+        });
+    });
+}
+
 function calcTotalResultPoint(state){
     const players = state.get("players");
     const playerIdList = players.get('idList');
@@ -166,6 +182,8 @@ export default function matchTableReducer(state = initialState, action) {
     case matchTableActionTypes.ADD_PLAYER: {
         return addPlayer(state,action);
     }
+    case matchTableActionTypes.DELETE_PLAYER: {
+        return deletePlayer(state, action.playerId);
     }
     case matchTableActionTypes.CHANGE_TMP_PLAYER_NAME: {
         return state.set('tmpPlayerName', action.playerName);
