@@ -9,7 +9,7 @@ function mapStateToProps(state, ownProps) {
         rightPlayerId,
     } = ownProps;
     return {
-    	matchResultId,
+        matchResultId,
         matchResult,
         leftPlayerId,
         rightPlayerId,

@@ -3,8 +3,8 @@ import MatrchTable from './MatchTable.jsx';
 import MatchTableActions from './MatchTableActions.js';
 function mapStateToProps(state) {
     return {
-    	players: state.matchTable.get('players'),
-    	matchResults: state.matchTable.get('matchResults'),
+        players: state.matchTable.get('players'),
+        matchResults: state.matchTable.get('matchResults'),
       totalResults: state.matchTable.get('totalResults'),
       tmpPlayerName: state.matchTable.get('tmpPlayerName'),
       openMenu: state.matchTable.get('openMenu'),
@@ -13,17 +13,20 @@ function mapStateToProps(state) {
 
 function mapDispatchToEvents(dispatch) {
     return {
-      onMountMatchTable: () => {
-        dispatch(MatchTableActions.loadTmpState());
-      },
-    	onClickAddPlayerButton: () => {
-    		dispatch(
-    			MatchTableActions.addPlayer()
-    		);
+        onMountMatchTable: () => {
+            dispatch(MatchTableActions.loadTmpState());
+        },
+        onClickAddPlayerButton: () => {
+            dispatch(
+                MatchTableActions.addPlayer()
+            );
             dispatch(
                 MatchTableActions.changeTmpPlayerName("")
             )
-    	},
+        },
+        onClickDeletePlayerButton: (playerId) => {
+            dispatch(MatchTableActions.deletePlayer(playerId))
+        },
         onChangeTmpPlayerName: (playerName) => {
             dispatch(
                 MatchTableActions.changeTmpPlayerName(playerName)

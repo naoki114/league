@@ -1,12 +1,12 @@
 .row {
-	float: none;
-	height: $cellHeight;
-	line-height: $cellHeight;
-	.playerName {
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		border-left-width: 1px;
-	}
-	@import './matchCell.scss';
+    float: none;
+    height: $cellHeight;
+    line-height: $cellHeight;
+    .playerName {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        border-left-width: 1px;
+    }
+    @import './matchCell.scss';
 }
