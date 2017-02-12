@@ -56,10 +56,11 @@ function addPlayer(state, action){
 
 function deletePlayer(state, playerId) {
     const matchResultById = state.getIn(['matchResults', 'byId']);
-    state.withMutations((ctx) => {
+    const indexOfPlayerid = state.getIn(['players', 'idList']).indexOf(playerId);
+    return state.withMutations((ctx) => {
         ctx.deleteIn(['players', 'byId', playerId])
-        .deleteIn(['players', 'idList', playerId])
-        .deleteId(['totalResults', 'byId', playerId]);
+        .deleteIn(['players', 'idList', indexOfPlayerid])
+        .deleteIn(['totalResults', 'byId', playerId]);
         matchResultById.map((matchResult, resultId) => {
             const idList = resultId.split('-');
             if( idList.indexOf(playerId) !== -1 ) {

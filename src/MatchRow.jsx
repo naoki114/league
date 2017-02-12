@@ -14,6 +14,7 @@ export default class MatchRow extends React.PureComponent{
             playerMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
             matchResultMap: React.PropTypes.instanceOf(Immutable.Map).isRequired,
             totalResult: React.PropTypes.instanceOf(Immutable.Map),
+            onClickDeletePlayerButton: React.PropTypes.func.isRequired,
             onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
             onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
         };
@@ -77,6 +78,13 @@ export default class MatchRow extends React.PureComponent{
                         {playerName}
                 </div>
                  {this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
+                <button
+                    className="deletePlayerButton"
+                    onClick={() => {
+                        onClickDeletePlayerButton(playerId);
+                    }}
+                />
+                {this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
                 <div className="result cell">
                     {winCount}
                 </div>
