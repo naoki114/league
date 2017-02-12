@@ -65,7 +65,8 @@ export default class MatchRow extends React.PureComponent{
             playerIdList,
             playerMap,
             matchResultMap,
-            totalResult
+            totalResult,
+            onClickDeletePlayerButton,
         } = this.props;
         const isCalced = totalResult !== undefined;
         const playerName = playerMap.getIn([playerId, 'name']);
