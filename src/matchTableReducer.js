@@ -2,32 +2,32 @@ import Immutable from 'immutable';
 import matchTableActionTypes from './matchTableActionTypes.js';
 
 const initialState = Immutable.fromJS({
-	players: {
-		maxId: 0,
-		idList: [],
-		byId: {},
-	},
-	matchResults: {
-		byId: {},
-	},
-  totalResults: {
-      byId: {},
-  },
-	tmpPlayerName: "",
-	openMenu: false,
+    players: {
+        maxId: 0,
+        idList: [],
+        byId: {},
+    },
+    matchResults: {
+        byId: {},
+    },
+    totalResults: {
+        byId: {},
+    },
+    tmpPlayerName: "",
+    openMenu: false,
 });
 
 function createEmptyResult(primaryPlayerId, playerIdList){
-	let matchResults = {};
-	playerIdList.forEach((playerId)=> {
-		if(primaryPlayerId !== playerId){
-			const newId = primaryPlayerId + '-' + playerId;
-			matchResults[newId] = {};
-			matchResults[newId][primaryPlayerId] = {point:0};
-			matchResults[newId][playerId] = {point:0};
-		}
-	});
-	return Immutable.fromJS(matchResults);
+    let matchResults = {};
+    playerIdList.forEach((playerId)=> {
+        if(primaryPlayerId !== playerId){
+            const newId = primaryPlayerId + '-' + playerId;
+            matchResults[newId] = {};
+            matchResults[newId][primaryPlayerId] = {point:0};
+            matchResults[newId][playerId] = {point:0};
+        }
+    });
+    return Immutable.fromJS(matchResults);
 }
 
 function addPlayer(state, action){
@@ -51,6 +51,23 @@ function addPlayer(state, action){
         .setIn(
             ['matchResults', 'byId'], oldMatchResults.mergeDeep(newMatchResults)
         )
+    });
+}
+
+function deletePlayer(state, playerId) {
+    const matchResultById = state.getIn(['matchResults', 'byId']);
+    const indexOfPlayerid = state.getIn(['players', 'idList']).indexOf(playerId);
+    return state.withMutations((ctx) => {
+        ctx.deleteIn(['players', 'byId', playerId])
+        .deleteIn(['players', 'idList', indexOfPlayerid])
+        .deleteIn(['totalResults', 'byId', playerId]);
+        matchResultById.map((matchResult, resultId) => {
+            const idList = resultId.split('-');
+            if( idList.indexOf(playerId) !== -1 ) {
+                ctx.deleteIn(['matchResults', 'byId', resultId]);
+            }
+            return matchResult;
+        });
     });
 }
 
@@ -87,87 +104,90 @@ function calcTotalResultPoint(state){
 }
 
 function calcTotalResultRanking(state) {
-	const totalResultsMap = state.getIn(['totalResults', 'byId']);
-	const playerPointMap = {};
+    const totalResultsMap = state.getIn(['totalResults', 'byId']);
+    const playerPointMap = {};
 
-	// create Map (key=winPoint, value=playerId)
-	totalResultsMap.forEach((totalResult) => {
-		const playerId = totalResult.get('playerId');
-		const winPoint = totalResult.get('winPoint');
-		let sameWinPointPlayers = playerPointMap[winPoint];
-		if(sameWinPointPlayers === undefined || sameWinPointPlayers === null) {
-			playerPointMap[winPoint] = [playerId];
-		} else {
-			sameWinPointPlayers.push(playerId);
-		}
+    // create Map (key=winPoint, value=playerId)
+    totalResultsMap.forEach((totalResult) => {
+        const playerId = totalResult.get('playerId');
+        const winPoint = totalResult.get('winPoint');
+        let sameWinPointPlayers = playerPointMap[winPoint];
+        if(sameWinPointPlayers === undefined || sameWinPointPlayers === null) {
+            playerPointMap[winPoint] = [playerId];
+        } else {
+            sameWinPointPlayers.push(playerId);
+        }
 
-	});
-	const ImmutablePlayerPointMap = new Immutable.Map(playerPointMap);
+    });
+    const ImmutablePlayerPointMap = new Immutable.Map(playerPointMap);
 
-	// sort key of map by winPoint
+    // sort key of map by winPoint
   let playerPointList = ImmutablePlayerPointMap.keySeq().toArray().sort((a, b) => {
-		return Number(a) < Number(b);
-	});
+        return Number(a) < Number(b);
+    });
 
-	// set rank
-	let rankNum = 1;
-	return state.withMutations((ctx) => {
-		playerPointList.forEach((winPoint) => {
-		 const samePointPlayers = ImmutablePlayerPointMap.get(winPoint);
-		 samePointPlayers.forEach((playerId) => {
-				 return ctx.setIn(['totalResults', 'byId', playerId, 'rank'], rankNum);
-		 });
-		rankNum ++;
-		});
-	});
+    // set rank
+    let rankNum = 1;
+    return state.withMutations((ctx) => {
+        playerPointList.forEach((winPoint) => {
+         const samePointPlayers = ImmutablePlayerPointMap.get(winPoint);
+         samePointPlayers.forEach((playerId) => {
+                 return ctx.setIn(['totalResults', 'byId', playerId, 'rank'], rankNum);
+         });
+        rankNum ++;
+        });
+    });
 
 }
 
 function loadTmpState(state) {
-	return state.withMutations((ctx) => {
-		if(localStorage.getItem("tmp_players") !== null) {
-			ctx.set(
-				'players' ,
-				Immutable.fromJS(
-					JSON.parse(
-						localStorage.getItem("tmp_players")
-					)
-				)
-			);
-		}
-		if(localStorage.getItem("tmp_matchResults") !== null) {
-			ctx.set(
-				'matchResults' ,
-				Immutable.fromJS(
-					JSON.parse(
-						localStorage.getItem("tmp_matchResults")
-					)
-				)
-			);
-		}
-		if(localStorage.getItem("tmp_totalResults") !== null) {
-			ctx.set(
-				'totalResults' ,
-				Immutable.fromJS(
-					JSON.parse(
-						localStorage.getItem("tmp_totalResults")
-					)
-				)
-			);
-		}
-	});
+    return state.withMutations((ctx) => {
+        if(localStorage.getItem("tmp_players") !== null) {
+            ctx.set(
+                'players' ,
+                Immutable.fromJS(
+                    JSON.parse(
+                        localStorage.getItem("tmp_players")
+                    )
+                )
+            );
+        }
+        if(localStorage.getItem("tmp_matchResults") !== null) {
+            ctx.set(
+                'matchResults' ,
+                Immutable.fromJS(
+                    JSON.parse(
+                        localStorage.getItem("tmp_matchResults")
+                    )
+                )
+            );
+        }
+        if(localStorage.getItem("tmp_totalResults") !== null) {
+            ctx.set(
+                'totalResults' ,
+                Immutable.fromJS(
+                    JSON.parse(
+                        localStorage.getItem("tmp_totalResults")
+                    )
+                )
+            );
+        }
+    });
 }
 
 export default function matchTableReducer(state = initialState, action) {
     switch (action.type) {
     case matchTableActionTypes.LOAD_TMP_STATE: {
-			return loadTmpState(state);
+            return loadTmpState(state);
     }
     case matchTableActionTypes.ADD_PLAYER: {
-    	return addPlayer(state,action);
+        return addPlayer(state,action);
+    }
+    case matchTableActionTypes.DELETE_PLAYER: {
+        return deletePlayer(state, action.playerId);
     }
     case matchTableActionTypes.CHANGE_TMP_PLAYER_NAME: {
-    	return state.set('tmpPlayerName', action.playerName);
+        return state.set('tmpPlayerName', action.playerName);
     }
     case matchTableActionTypes.CHANGE_LEFT_PLAYER_POINT: {
         return state.setIn(
@@ -185,10 +205,10 @@ export default function matchTableReducer(state = initialState, action) {
         const resultWithPoint = calcTotalResultPoint(state);
         return calcTotalResultRanking(resultWithPoint);
     }
-		case matchTableActionTypes.TOGGLE_OPEN_MENU: {
-			 const openMenu = state.get('openMenu');
-			 return state.set('openMenu', !openMenu);
-		}
+        case matchTableActionTypes.TOGGLE_OPEN_MENU: {
+             const openMenu = state.get('openMenu');
+             return state.set('openMenu', !openMenu);
+        }
     default:
         return state;
     }

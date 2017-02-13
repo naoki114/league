@@ -2,26 +2,26 @@ import Immutable from 'immutable';
 import matchCellActionTypes from './matchCellActionTypes.js';
 
 const initialState = Immutable.fromJS({
-	editingLeftPlayerId: null,
+    editingLeftPlayerId: null,
     editingRightPlayerId: null,
 });
 
 export default function matchCellReducer(state = initialState, action) {
     switch (action.type) {
-    	case matchCellActionTypes.OPEN_EDITOR: {
-    		return state.withMutations((ctx) => {
+        case matchCellActionTypes.OPEN_EDITOR: {
+            return state.withMutations((ctx) => {
                 ctx.set('editingLeftPlayerId', action.leftPlayerId)
                 .set('editingRightPlayerId', action.rightPlayerId);
             });
-    	}
-    	case matchCellActionTypes.CLOSE_EDITOR: {
-    		return state.withMutations((ctx) => {
+        }
+        case matchCellActionTypes.CLOSE_EDITOR: {
+            return state.withMutations((ctx) => {
                 return ctx.set('editingLeftPlayerId', null)
                 .set('editingRightPlayerId', null);
             });
-    	} 
-    	default: {
+        } 
+        default: {
             return state;
         }
-   	}
+       }
 }

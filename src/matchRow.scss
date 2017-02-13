@@ -1,12 +1,30 @@
-.row {
-	float: none;
-	height: $cellHeight;
-	line-height: $cellHeight;
-	.playerName {
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		border-left-width: 1px;
-	}
-	@import './matchCell.scss';
+> .row {
+    display: flex;
+    height: auto;
+    > .playerName {
+        border-left-width: 1px;
+        overflow: hidden;
+        display: flex;
+        &:hover > .deletePlayerButton {
+            width: 20px;
+        }
+        > .deletePlayerButton {
+            background-color: red;
+            color: white;
+            border-style: none;
+            width: 0px;
+            height: 100%;
+            top: 1px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-align: center;
+        }
+        > .text {
+            width: calc(100% - 20px);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+    @import './matchCell.scss';
 }
