@@ -76,15 +76,16 @@ export default class MatchRow extends React.PureComponent{
         return (
             <div className="row" key={playerId}>
                 <div className="playerName cell">
+                    <div
+                        className="deletePlayerButton"
+                        onClick={() => {
+                            onClickDeletePlayerButton(playerId);
+                        }}
+                    >x</div>
+                    <div className="text">
                         {playerName}
+                    </div>
                 </div>
-                 {this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
-                <button
-                    className="deletePlayerButton"
-                    onClick={() => {
-                        onClickDeletePlayerButton(playerId);
-                    }}
-                />
                 {this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
                 <div className="result cell">
                     {winCount}

@@ -4,14 +4,14 @@
     .innerMatchCell {
         width: $cellWidth;
         height: $cellHeight;
+        display: flex;
         .result {
-            display: inline-block;
             margin-left: 20px;
             margin-right: 20px;
             width: 50px;
         }
         .editButton {
-            display: inline-block;
+            height: 30px;
         }
     }
     .matchEditor {
