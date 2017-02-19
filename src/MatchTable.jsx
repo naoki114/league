@@ -69,19 +69,21 @@ export default class MatchTable extends React.PureComponent {
         return (
             <thead className="headerRow">
                 <tr>
-                    <th className="cell emptyCell" />
+                    <th className="emptyCell headerCell" />
                     {
                         playerIdList.map((playerId) => {
                             return (
-                                <th className="headerPlayerName cell" key={playerId}>
+                                <th className="headerPlayerName headerCell" key={playerId}>
                                     {playerMap.getIn([playerId, 'name'])}
                                 </th>
                             );
                         })
                     }
-                    <th className="result cell">勝ち数</th>
-                    <th className="result cell">勝ち点</th>
-                    <th className="result cell">順位</th>
+                    <th className="result headerCell">勝</th>
+                    <th className="result headerCell">負</th>
+                    <th className="result headerCell">分</th>
+                    <th className="result headerCell">点数</th>
+                    <th className="result headerCell">順位</th>
                 </tr>
             </thead>
         );
@@ -122,11 +124,10 @@ export default class MatchTable extends React.PureComponent {
             totalResults,
             players,
             tmpPlayerName,
-            openMenu,
         } = this.props;
         return (
             <div className="matchTable">
-                {this.renderButtonGroup(tmpPlayerName, openMenu)}
+                {this.renderButtonGroup(tmpPlayerName)}
                 <table>
                     {this.renderHeaderRow(players)}
                     <tbody>

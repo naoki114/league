@@ -71,6 +71,8 @@ export default class MatchRow extends React.PureComponent{
         const isCalced = totalResult !== undefined;
         const playerName = playerMap.getIn([playerId, 'name']);
         const winCount =  isCalced ? totalResult.get('winCount') : 0;
+        const loseCount = isCalced ? totalResult.get('loseCount') : 0;
+        const drawCount = isCalced ? totalResult.get('drawCount') : 0;
         const winPoint =  isCalced ? totalResult.get('winPoint'): 0;
         const rank = isCalced ? totalResult.get('rank'): 0;
         return (
@@ -89,6 +91,12 @@ export default class MatchRow extends React.PureComponent{
                 {this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
                 <td className="result cell">
                     {winCount}
+                </td>
+                <td className="result cell">
+                    {loseCount}
+                </td>
+                <td className="result cell">
+                    {drawCount}
                 </td>
                 <td className="result cell">
                     {winPoint}

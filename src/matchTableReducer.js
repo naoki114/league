@@ -79,7 +79,9 @@ function calcTotalResultPoint(state){
         // 勝ち数計算
         playerIdList.forEach((playerId) => {
             let winCount = 0;
+            let loseCount = 0;
             let winPoint = 0;
+            let drawCount = 0;
             playerIdList.forEach((anotherPlayerId) => {
                 if (playerId !== anotherPlayerId) {
                     let matchResultId = [playerId, anotherPlayerId].join('-');
@@ -90,14 +92,18 @@ function calcTotalResultPoint(state){
                     }
                     const playerPoint = matchResult.getIn([playerId, 'point']);
                     const anotherPlayerPoint = matchResult.getIn([anotherPlayerId, 'point']);
-                    if(playerPoint > anotherPlayerPoint){
+                    if (playerPoint > anotherPlayerPoint){
                         winCount++;
+                    } else if ( playerPoint < anotherPlayerPoint) {
+                        loseCount++;
+                    } else  if (playerPoint === anotherPlayerPoint){
+                        drawCount++;
                     }
                     winPoint += playerPoint;
                     winPoint -= anotherPlayerPoint;
                 }
             });
-            const totalResult = new Immutable.Map({winCount, winPoint, playerId});
+            const totalResult = new Immutable.Map({winCount, drawCount, loseCount, winPoint, playerId});
             ctx.setIn(['totalResults', 'byId', playerId], totalResult);
         });
     });
