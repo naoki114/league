@@ -33,37 +33,39 @@ export default class MatchTable extends React.PureComponent {
             inputGroup: true,
             open: openMenu,
         });
-        const menuButtonText = openMenu ? '閉' : '開';
+        const menuButtonText = openMenu ? 'CLOSE' : 'OPEN';
         return (
             <div className="buttonGroup">
-                <button
-                    className='menuButton'
-                    onClick={this.props.onClickOpenButton}
-                >
-                    {menuButtonText}
-                </button>
-                <div className={inputGroupClassName}>
-                    <input
-                        className="playerNameField"
-                        type="text"
-                        value={tmpPlayerName}
-                        placeholder="参加者名を入力"
-                        onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
-                    />
+                <div className="innerGroup">
                     <button
-                        className="addPlayerButton"
-                        onClick={onClickAddPlayerButton}
-                    >
-                        参加者追加
+                        className='menuButton'
+                        onClick={this.props.onClickOpenButton}
+                        >
+                        {menuButtonText}
                     </button>
-                    <button
-                        className="calcButton"
-                        onClick={() => {
-                            onClickCalcButton();
-                        }}
-                    >
-                    計算
-                    </button>
+                    <div className={inputGroupClassName}>
+                        <input
+                            className="playerNameField"
+                            type="text"
+                            value={tmpPlayerName}
+                            placeholder="参加者名を入力"
+                            onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
+                            />
+                        <div
+                            className="addPlayerButton"
+                            onClick={onClickAddPlayerButton}
+                            >
+                            参加者追加
+                        </div>
+                        <div
+                            className="calcButton"
+                            onClick={() => {
+                                onClickCalcButton();
+                            }}
+                            >
+                            計算
+                        </div>
+                    </div>
                 </div>
             </div>
         )
