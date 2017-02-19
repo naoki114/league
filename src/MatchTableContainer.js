@@ -61,9 +61,6 @@ function mapDispatchToEvents(dispatch) {
         onClickCalcButton: () => {
             dispatch(MatchTableActions.calcTotalResults())
         },
-        onClickOpenButton: () => {
-            dispatch(MatchTableActions.toggleOpenMenu())
-        }
     };
 }
 
