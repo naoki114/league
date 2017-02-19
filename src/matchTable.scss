@@ -21,89 +21,121 @@
         max-width: 50px;
     }
     .emptyCell {
-      background-color: gray;
+        background-color: gray;
     }
-    .headerRow {
-      display: flex;
-      .headerPlayerName {
-        height: $cellHeight;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-      > .cell {
-          border-style: solid;
-          border-top-color: black;
-          border-width: 1px 1px 1px 0px;
-        &:first-child {
-          border-left-width: 1px;
-        }
-      }
-    }
+    > .buttonGroup {
+        height: 40px;
+        background-color: #696969;
+        opacity: 0;
+        transition: ease 0.2s;
 
-    > .buttonGroup{
-      display: flex;
-      > .menuButton {
-        width: 30px;
-        height: 30px;
-        flex: 0;
-      }
-      > .inputGroup {
-          opacity: 0;
-          &.open {
+        &:hover {
             opacity: 1;
-          }
-          .playerNameField {
-            font-size: 15px;
-            width: 150px;
-            height: 25px;
-            outline: none;
-            border-radius: 5px;
-            border-width: 1px;
-            border-style: solid;
-            background-color: lightgray;
-          }
-
-          .addPlayerButton {
-            font-size: 15px;
-            width: 150px;
-            height: 30px;
-            margin-left: 5px;
-            border-radius: 5px;
-            border-style: none;
-            outline: none;
-            background-color: #0084b4;
-            color: white;
-            transition: 0.2s ease;
-            &:hover {
-              cursor: pointer;
-              background-color: #006B9B;
+            > .innerGroup {
+                height: 40px;
             }
-            &:active {
-              background-color: #005181;
+        }
+        > .innerGroup {
+            display: flex;
+            padding-top: 5px;
+            padding-left: 5px;
+            margin-bottom: 5px;
+            height: 0px;
+            > .inputGroup {
+                height: 0px;
+                margin-left: 5px;
+                display: flex;
+                &.open {
+                  height: 40px;
+                }
+                .playerNameField {
+                    font-size: 15px;
+                    width: 150px;
+                    height: 30px;
+                    padding: 0;
+                    outline: none;
+                    border-radius: 5px 0 0 5px;
+                    border-width: 1px 0px 1px 1px;
+                    border-style: solid;
+                    border-color: black;
+                    background-color: lightgray;
+                }
+                .addPlayerButton {
+                    font-size: 15px;
+                    line-height: 30px;
+                    border-radius: 0 5px 5px 0;
+                    border-style: solid;
+                    border-width: 1px 1px 1px 0px;
+                    outline: none;
+                    height: 30px;
+                    padding-left: 7px;
+                    padding-right: 7px;
+                    color: white;
+                    border-color: black;
+                    background-color: #0084b4;
+                    text-align: center;
+                    user-select: none;
+                    transition: 0.2s ease;
+                    &:hover {
+                      cursor: pointer;
+                      background-color: #006B9B;
+                    }
+                    &:active {
+                      background-color: #005181;
+                    }
+                }
+                .calcButton {
+                    font-size: 15px;
+                    width: 50px;
+                    height: 30px;
+                    line-height: 30px;
+                    margin-left: 5px;
+                    outline: none;
+                    border-radius: 5px;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-color: black;
+                    outline: none;
+                    background-color: #FFA500;
+                    color: white;
+                    text-align: center;
+                    transition: 0.2s ease;
+                    user-select: none;
+                    &:hover {
+                      cursor: pointer;
+                      background-color: #E68C00;
+                    }
+                    &:active {
+                      background-color: #CC7200;
+                    }
+                }
             }
-          }
-          .calcButton {
-            font-size: 15px;
-            width: 150px;
-            height: 30px;
-            margin-left: 5px;
-            outline: none;
-            border-radius: 5px;
-            border-style: none;
-            outline: none;
-            background-color: #FFA500;
-            color: white;
-            transition: 0.2s ease;
-            &:hover {
-              cursor: pointer;
-              background-color: #E68C00;
-            }
-            &:active {
-              background-color: #CC7200;
-            }
-          }
         }
     }
-    @import './matchRow.scss';
+    > table {
+        margin: 5px;
+        border-spacing: 0px;
+        > .headerRow {
+            > tr {
+                > .headerCell {
+                    height: $cellHeight;
+                    max-width: 150px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    border-style: solid;
+                    border-top-color: black;
+                    border-width: 1px 1px 1px 0px;
+                    text-align: left;
+                    font-weight: normal;
+                    &:first-child {
+                      border-left-width: 1px;
+                    }
+                }
+            }
+        }
+        > tbody {
+            @import './matchRow.scss';
+        }
+    }
   }

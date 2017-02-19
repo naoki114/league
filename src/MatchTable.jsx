@@ -18,52 +18,45 @@ export default class MatchTable extends React.PureComponent {
             onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
             onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
             onClickCalcButton: React.PropTypes.func.isRequired,
-            onClickOpenButton: React.PropTypes.func.isRequired,
         };
     }
 
     componentDidMount(){
             this.props.onMountMatchTable();
     }
-    renderButtonGroup(tmpPlayerName, openMenu) {
+    renderButtonGroup(tmpPlayerName) {
         const onClickAddPlayerButton = this.props.onClickAddPlayerButton;
         const onChangeTmpPlayerName = this.props.onChangeTmpPlayerName;
         const onClickCalcButton = this.props.onClickCalcButton;
         const inputGroupClassName = classNames({
             inputGroup: true,
-            open: openMenu,
         });
-        const menuButtonText = openMenu ? '閉' : '開';
         return (
             <div className="buttonGroup">
-                <button
-                    className='menuButton'
-                    onClick={this.props.onClickOpenButton}
-                >
-                    {menuButtonText}
-                </button>
-                <div className={inputGroupClassName}>
-                    <input
-                        className="playerNameField"
-                        type="text"
-                        value={tmpPlayerName}
-                        placeholder="参加者名を入力"
-                        onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
-                    />
-                    <button
-                        className="addPlayerButton"
-                        onClick={onClickAddPlayerButton}
-                    >
-                        参加者追加
-                    </button>
-                    <button
-                        className="calcButton"
-                        onClick={() => {
-                            onClickCalcButton();
-                        }}
-                    >
-                    計算
-                    </button>
+                <div className="innerGroup">
+                    <div className={inputGroupClassName}>
+                        <input
+                            className="playerNameField"
+                            type="text"
+                            value={tmpPlayerName}
+                            placeholder="参加者名を入力"
+                            onChange={(e)=> {onChangeTmpPlayerName(e.target.value)}}
+                            />
+                        <div
+                            className="addPlayerButton"
+                            onClick={onClickAddPlayerButton}
+                            >
+                            参加者追加
+                        </div>
+                        <div
+                            className="calcButton"
+                            onClick={() => {
+                                onClickCalcButton();
+                            }}
+                            >
+                            計算
+                        </div>
+                    </div>
                 </div>
             </div>
         )
@@ -74,21 +67,23 @@ export default class MatchTable extends React.PureComponent {
         const playerMap =  players.get('byId');
         // 行を生成
         return (
-            <div className="headerRow">
-                <div className="cell emptyCell" />
-                {
-                    playerIdList.map((playerId) => {
-                        return (
-                            <div className="headerPlayerName cell" key={playerId}>
-                                {playerMap.getIn([playerId, 'name'])}
-                            </div>
-                        );
-                    })
-                }
-                <div className="result cell">勝ち数</div>
-                <div className="result cell">勝ち点</div>
-                <div className="result cell">順位</div>
-            </div>
+            <thead className="headerRow">
+                <tr>
+                    <th className="cell emptyCell" />
+                    {
+                        playerIdList.map((playerId) => {
+                            return (
+                                <th className="headerPlayerName cell" key={playerId}>
+                                    {playerMap.getIn([playerId, 'name'])}
+                                </th>
+                            );
+                        })
+                    }
+                    <th className="result cell">勝ち数</th>
+                    <th className="result cell">勝ち点</th>
+                    <th className="result cell">順位</th>
+                </tr>
+            </thead>
         );
     }
 
@@ -132,12 +127,16 @@ export default class MatchTable extends React.PureComponent {
         return (
             <div className="matchTable">
                 {this.renderButtonGroup(tmpPlayerName, openMenu)}
-                {this.renderHeaderRow(players)}
-                {this.renderRows(
-                    players,
-                    matchResults,
-                    totalResults
-                )}
+                <table>
+                    {this.renderHeaderRow(players)}
+                    <tbody>
+                        {this.renderRows(
+                            players,
+                            matchResults,
+                            totalResults
+                        )}
+                    </tbody>
+                </table>
             </div>
         );
     }

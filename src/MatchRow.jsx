@@ -6,7 +6,7 @@ import MatchCellContainer from './MatchCellContainer.js';
  *　対戦表の行を描画
 　*/
 export default class MatchRow extends React.PureComponent{
-    
+
     static get propTypes(){
         return {
             playerId: React.PropTypes.string.isRequired,
@@ -19,7 +19,7 @@ export default class MatchRow extends React.PureComponent{
             onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
         };
     }
-    
+
     /**
      * 対戦表のセルを描画
      * @param matchResult 対戦成績
@@ -41,7 +41,7 @@ export default class MatchRow extends React.PureComponent{
             />
         );
     }
-    
+
     renderMatchCells(playerId, playerIdList, playerMap, matchResultMap) {
          return playerIdList.map((innerPlayerId) => {
              if(innerPlayerId !== playerId) {
@@ -54,7 +54,7 @@ export default class MatchRow extends React.PureComponent{
                  return this.renderMatchCell(matchResultId, matchResult, playerId, innerPlayerId);
              }
              return (
-                 <div className="emptyCell cell" key={innerPlayerId}/>
+                 <td className="emptyCell cell" key={innerPlayerId}/>
              )
          })
     }
@@ -74,8 +74,8 @@ export default class MatchRow extends React.PureComponent{
         const winPoint =  isCalced ? totalResult.get('winPoint'): 0;
         const rank = isCalced ? totalResult.get('rank'): 0;
         return (
-            <div className="row" key={playerId}>
-                <div className="playerName cell">
+            <tr className="row" key={playerId}>
+                <td className="playerName cell">
                     <div
                         className="deletePlayerButton"
                         onClick={() => {
@@ -85,18 +85,18 @@ export default class MatchRow extends React.PureComponent{
                     <div className="text">
                         {playerName}
                     </div>
-                </div>
+                </td>
                 {this.renderMatchCells(playerId, playerIdList, playerMap, matchResultMap)}
-                <div className="result cell">
+                <td className="result cell">
                     {winCount}
-                </div>
-                <div className="result cell">
+                </td>
+                <td className="result cell">
                     {winPoint}
-                </div>
-                <div className="result cell">
+                </td>
+                <td className="result cell">
                     {rank}
-                </div>
-            </div>
+                </td>
+            </tr>
         );
     }
 }

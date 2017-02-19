@@ -19,21 +19,21 @@ export default class MatchCell extends React.PureComponent{
     }
     renderEditButton(leftPlayerId, rightPlayerId){
         return (
-            <button
+            <div
                 className="editButton"
                 onClick={() => {
                     this.props.onClickInputButton(leftPlayerId, rightPlayerId);
                 }}
             >
                 入力
-            </button>
+            </div>
         )
     }
 
     renderCell(resultString, leftPlayerId, rightPlayerId){
         return (
             <div className="innerMatchCell">
-                <div className="result">{resultString}    </div>
+                <div className="result">{resultString}</div>
                 {this.renderEditButton(leftPlayerId, rightPlayerId)}
             </div>
         );
@@ -110,7 +110,7 @@ export default class MatchCell extends React.PureComponent{
             (editingLeftPlayerId === leftPlayerId)
             && (editingRightPlayerId === rightPlayerId);
         return (
-            <div
+            <td
                 className="matchCell cell"
                 key={rightPlayerId}
             >
@@ -123,7 +123,7 @@ export default class MatchCell extends React.PureComponent{
                     rightPlayerId,
                     rightPlayerPoint
                 )}
-            </div> 
+            </td>
         );
     }
 }
