@@ -110,7 +110,7 @@ export default class MatchCell extends React.PureComponent{
             (editingLeftPlayerId === leftPlayerId)
             && (editingRightPlayerId === rightPlayerId);
         return (
-            <div
+            <td
                 className="matchCell cell"
                 key={rightPlayerId}
             >
@@ -123,7 +123,7 @@ export default class MatchCell extends React.PureComponent{
                     rightPlayerId,
                     rightPlayerPoint
                 )}
-            </div> 
+            </td>
         );
     }
 }

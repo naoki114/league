@@ -1,20 +1,21 @@
-.matchCell {
-    position: relative;
+> .matchCell {
     outline: none;
-    .innerMatchCell {
+    position: relative;
+    > .innerMatchCell {
+        display: flex;
         width: $cellWidth;
         height: $cellHeight;
-        display: flex;
-        .result {
+        position: relative;
+        > .result {
             margin-left: 20px;
             margin-right: 20px;
             width: 50px;
         }
-        .editButton {
+        > .editButton {
             height: 30px;
         }
     }
-    .matchEditor {
+    > .matchEditor {
         position: absolute;
         top: 0px;
         left: #{$cellWidth - 80px};

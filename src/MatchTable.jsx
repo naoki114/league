@@ -74,21 +74,23 @@ export default class MatchTable extends React.PureComponent {
         const playerMap =  players.get('byId');
         // 行を生成
         return (
-            <div className="headerRow">
-                <div className="cell emptyCell" />
-                {
-                    playerIdList.map((playerId) => {
-                        return (
-                            <div className="headerPlayerName cell" key={playerId}>
-                                {playerMap.getIn([playerId, 'name'])}
-                            </div>
-                        );
-                    })
-                }
-                <div className="result cell">勝ち数</div>
-                <div className="result cell">勝ち点</div>
-                <div className="result cell">順位</div>
-            </div>
+            <thead className="headerRow">
+                <tr>
+                    <th className="cell emptyCell" />
+                    {
+                        playerIdList.map((playerId) => {
+                            return (
+                                <th className="headerPlayerName cell" key={playerId}>
+                                    {playerMap.getIn([playerId, 'name'])}
+                                </th>
+                            );
+                        })
+                    }
+                    <th className="result cell">勝ち数</th>
+                    <th className="result cell">勝ち点</th>
+                    <th className="result cell">順位</th>
+                </tr>
+            </thead>
         );
     }
 
@@ -132,12 +134,16 @@ export default class MatchTable extends React.PureComponent {
         return (
             <div className="matchTable">
                 {this.renderButtonGroup(tmpPlayerName, openMenu)}
-                {this.renderHeaderRow(players)}
-                {this.renderRows(
-                    players,
-                    matchResults,
-                    totalResults
-                )}
+                <table>
+                    {this.renderHeaderRow(players)}
+                    <tbody>
+                        {this.renderRows(
+                            players,
+                            matchResults,
+                            totalResults
+                        )}
+                    </tbody>
+                </table>
             </div>
         );
     }

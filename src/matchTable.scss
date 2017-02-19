@@ -24,7 +24,6 @@
       background-color: gray;
     }
     .headerRow {
-      display: flex;
       .headerPlayerName {
         height: $cellHeight;
         overflow: hidden;
@@ -105,5 +104,7 @@
           }
         }
     }
-    @import './matchRow.scss';
+    tbody {
+        @import './matchRow.scss';
+    }
   }
