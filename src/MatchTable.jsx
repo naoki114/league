@@ -18,31 +18,22 @@ export default class MatchTable extends React.PureComponent {
             onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
             onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
             onClickCalcButton: React.PropTypes.func.isRequired,
-            onClickOpenButton: React.PropTypes.func.isRequired,
         };
     }
 
     componentDidMount(){
             this.props.onMountMatchTable();
     }
-    renderButtonGroup(tmpPlayerName, openMenu) {
+    renderButtonGroup(tmpPlayerName) {
         const onClickAddPlayerButton = this.props.onClickAddPlayerButton;
         const onChangeTmpPlayerName = this.props.onChangeTmpPlayerName;
         const onClickCalcButton = this.props.onClickCalcButton;
         const inputGroupClassName = classNames({
             inputGroup: true,
-            open: openMenu,
         });
-        const menuButtonText = openMenu ? 'CLOSE' : 'OPEN';
         return (
             <div className="buttonGroup">
                 <div className="innerGroup">
-                    <button
-                        className='menuButton'
-                        onClick={this.props.onClickOpenButton}
-                        >
-                        {menuButtonText}
-                    </button>
                     <div className={inputGroupClassName}>
                         <input
                             className="playerNameField"

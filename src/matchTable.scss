@@ -24,34 +24,23 @@
         background-color: gray;
     }
     > .buttonGroup {
-        height: 0px;
+        height: 40px;
         background-color: #696969;
         opacity: 0;
         transition: ease 0.2s;
+
         &:hover {
             opacity: 1;
-            height: 40px;
+            > .innerGroup {
+                height: 40px;
+            }
         }
         > .innerGroup {
             display: flex;
             padding-top: 5px;
             padding-left: 5px;
             margin-bottom: 5px;
-            > .menuButton {
-                height: 30px;
-                flex: 0;
-                user-select: none;
-                outline: none;
-                cursor: pointer;
-                border-radius: 5px;
-                border-width: 1px 0px 1px 1px;
-                border-style: solid;
-                background-color: lightgray;
-                transition: ease 0.2s;
-                &:hover {
-                    background-color: rgba(0, 0, 0, 0.07);
-                }
-            }
+            height: 0px;
             > .inputGroup {
                 height: 0px;
                 margin-left: 5px;
