@@ -15,13 +15,7 @@
             max-width: none;
         }
         &:hover {
-            > .editButton {
-                height: 30px;
-                line-height: 30px;
-                width: 50px;
-                opacity: 1;
-            }
-
+            cursor: pointer;
         }
         > .editButton {
             height: 0px;
