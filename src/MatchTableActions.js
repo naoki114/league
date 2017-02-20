@@ -32,31 +32,25 @@ export default class MatchTableActions {
         };
     }
 
-    static changeLeftPlayerPoint(
+    /**
+     * プレイヤーの点数を変更する
+     * @param {string} matchResultId 対戦結果Id
+     * @param {string} playerId プレイヤーのId
+     * @param {string} playerPoint プレイヤーの点数
+     */
+    static changePlayerPoint(
         matchResultId,
-        leftPlayerId,
-        leftPlayerPoint
+        playerId,
+        playerPoint
     ){
         return{
-            type: matchTableActionTypes.CHANGE_LEFT_PLAYER_POINT,
+            type: matchTableActionTypes.CHANGE_PLAYER_POINT,
             matchResultId,
-            leftPlayerId,
-            leftPlayerPoint,
+            playerId,
+            playerPoint,
         };
     }
 
-    static changeRightPlayerPoint(
-        matchResultId,
-        rightPlayerId,
-        rightPlayerPoint
-    ){
-        return {
-            type: matchTableActionTypes.CHANGE_RIGHT_PLAYER_POINT,
-            matchResultId,
-            rightPlayerId,
-            rightPlayerPoint,
-        };
-    }
 
     static calcTotalResults() {
         return {

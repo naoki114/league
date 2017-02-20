@@ -13,8 +13,7 @@ export default class MatchCell extends React.PureComponent{
             editingRightPlayerId: React.PropTypes.string,
             onClickInputButton: React.PropTypes.func.isRequired,
             onClickOkButton: React.PropTypes.func.isRequired,
-            onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
-            onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
+            onChangePlayerPoint: React.PropTypes.func.isRequired,
         };
     }
     renderEditButton(leftPlayerId, rightPlayerId){
@@ -58,7 +57,7 @@ export default class MatchCell extends React.PureComponent{
                             value={leftPlayerPoint}
                             className="pointInput left"
                             onChange={(e)=>{
-                                this.props.onChangeLeftPlayerPoint(
+                                this.props.onChangePlayerPoint(
                                     matchResultId,
                                     leftPlayerId,
                                     e.target.value
@@ -72,7 +71,7 @@ export default class MatchCell extends React.PureComponent{
                             value={rightPlayerPoint}
                             className="pointInput right"
                             onChange={(e)=>{
-                                this.props.onChangeRightPlayerPoint(
+                                this.props.onChangePlayerPoint(
                                     matchResultId,
                                     rightPlayerId,
                                     e.target.value
