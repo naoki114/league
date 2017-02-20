@@ -22,7 +22,9 @@ function createEmptyResult(primaryPlayerId, playerIdList){
     playerIdList.forEach((playerId)=> {
         if(primaryPlayerId !== playerId){
             const newId = primaryPlayerId + '-' + playerId;
-            matchResults[newId] = {};
+            matchResults[newId] = {
+                isDoneBattle: false,
+            };
             matchResults[newId][primaryPlayerId] = {point:0};
             matchResults[newId][playerId] = {point:0};
         }
@@ -90,17 +92,19 @@ function calcTotalResultPoint(state){
                         matchResultId = [anotherPlayerId, playerId].join('-');
                         matchResult = matchResultsMap.get(matchResultId);
                     }
-                    const playerPoint = matchResult.getIn([playerId, 'point']);
-                    const anotherPlayerPoint = matchResult.getIn([anotherPlayerId, 'point']);
-                    if (playerPoint > anotherPlayerPoint){
-                        winCount++;
-                    } else if ( playerPoint < anotherPlayerPoint) {
-                        loseCount++;
-                    } else  if (playerPoint === anotherPlayerPoint){
-                        drawCount++;
+                    if(matchResult.get('isDoneBattle')) {
+                        const playerPoint = matchResult.getIn([playerId, 'point']);
+                        const anotherPlayerPoint = matchResult.getIn([anotherPlayerId, 'point']);
+                        if (playerPoint > anotherPlayerPoint){
+                            winCount++;
+                        } else if ( playerPoint < anotherPlayerPoint) {
+                            loseCount++;
+                        } else  if (playerPoint === anotherPlayerPoint){
+                            drawCount++;
+                        }
+                        winPoint += playerPoint;
+                        winPoint -= anotherPlayerPoint;
                     }
-                    winPoint += playerPoint;
-                    winPoint -= anotherPlayerPoint;
                 }
             });
             const totalResult = new Immutable.Map({winCount, drawCount, loseCount, winPoint, playerId});
