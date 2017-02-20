@@ -8,6 +8,7 @@ const localStorageMiddleware = store => next => action => {
     case matchTableActionTypes.CHANGE_LEFT_PLAYER_POINT:
     case matchTableActionTypes.CALC_TOTAL_RESULTS:
     case matchTableActionTypes.ADD_PLAYER:
+    case matchTableActionTypes.DELETE_PLAYER:
       localStorage.setItem(
           "tmp_players",
           JSON.stringify(
