@@ -15,8 +15,7 @@ export default class MatchTable extends React.PureComponent {
             onClickAddPlayerButton: React.PropTypes.func.isRequired,
             onClickDeletePlayerButton: React.PropTypes.func.isRequired,
             onChangeTmpPlayerName: React.PropTypes.func.isRequired,
-            onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
-            onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
+            onChangePlayerPoint: React.PropTypes.func.isRequired,
             onClickCalcButton: React.PropTypes.func.isRequired,
         };
     }
@@ -95,8 +94,7 @@ export default class MatchTable extends React.PureComponent {
         const matchResultMap = matchResults.get('byId');
         const totalResultMap = totalResults.get('byId');
         const {
-            onChangeLeftPlayerPoint,
-            onChangeRightPlayerPoint,
+            onChangePlayerPoint,
             onClickDeletePlayerButton,
         } = this.props;
         // 行を生成
@@ -111,8 +109,7 @@ export default class MatchTable extends React.PureComponent {
                     totalResult={totalResult}
                     key={playerId}
                     onClickDeletePlayerButton={onClickDeletePlayerButton}
-                    onChangeLeftPlayerPoint={onChangeLeftPlayerPoint}
-                    onChangeRightPlayerPoint={onChangeRightPlayerPoint}
+                    onChangePlayerPoint={onChangePlayerPoint}
                 />
             );
         })

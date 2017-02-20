@@ -32,29 +32,16 @@ function mapDispatchToEvents(dispatch) {
                 MatchTableActions.changeTmpPlayerName(playerName)
             )
         },
-        onChangeLeftPlayerPoint: (
+        onChangePlayerPoint: (
             matchResultId,
-            leftPlayerId,
-            leftPlayerPoint
+            playerId,
+            playerPoint
         ) => {
             dispatch(
-                MatchTableActions.changeLeftPlayerPoint(
+                MatchTableActions.changePlayerPoint(
                     matchResultId,
-                    leftPlayerId,
-                    leftPlayerPoint
-                )
-            )
-        },
-        onChangeRightPlayerPoint: (
-            matchResultId,
-            rightPlayerId,
-            rightPlayerPoint
-        ) => {
-            dispatch(
-                MatchTableActions.changeRightPlayerPoint(
-                    matchResultId,
-                    rightPlayerId,
-                    rightPlayerPoint
+                    playerId,
+                    playerPoint
                 )
             )
         },

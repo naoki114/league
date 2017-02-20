@@ -48,17 +48,17 @@
     > .matchEditor {
         position: absolute;
         top: 1px;
-        left: #{$cellWidth - 40px};
+        left: #{$cellWidth - 30px};
         width: 200px;
         height: $cellHeight;
-        background-color: #336699;
+        background-color: #696969;
         border: none;
         border-radius: 5px 5px 5px 5px;
         box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
         z-index: 1;
         &:after {
             border: 10px solid transparent;
-            border-right-color: #336699;
+            border-right-color: #696969;
             border-left-width: 0;
             width: 0;
             left: -10px;

@@ -13,28 +13,19 @@ export default class MatchCell extends React.PureComponent{
             editingRightPlayerId: React.PropTypes.string,
             onClickInputButton: React.PropTypes.func.isRequired,
             onClickOkButton: React.PropTypes.func.isRequired,
-            onChangeLeftPlayerPoint: React.PropTypes.func.isRequired,
-            onChangeRightPlayerPoint: React.PropTypes.func.isRequired,
+            onChangePlayerPoint: React.PropTypes.func.isRequired,
         };
     }
-    renderEditButton(leftPlayerId, rightPlayerId){
+
+    renderCell(resultString, leftPlayerId, rightPlayerId, isDoneBattle){
+        const matchResultString = isDoneBattle ? resultString : '未対戦';
         return (
-            <div
-                className="editButton"
+            <div className="innerMatchCell"
                 onClick={() => {
                     this.props.onClickInputButton(leftPlayerId, rightPlayerId);
                 }}
             >
-                入力
-            </div>
-        )
-    }
-
-    renderCell(resultString, leftPlayerId, rightPlayerId){
-        return (
-            <div className="innerMatchCell">
-                <div className="result">{resultString}</div>
-                {this.renderEditButton(leftPlayerId, rightPlayerId)}
+                <div className="result">{matchResultString}</div>
             </div>
         );
     }
@@ -58,7 +49,7 @@ export default class MatchCell extends React.PureComponent{
                             value={leftPlayerPoint}
                             className="pointInput left"
                             onChange={(e)=>{
-                                this.props.onChangeLeftPlayerPoint(
+                                this.props.onChangePlayerPoint(
                                     matchResultId,
                                     leftPlayerId,
                                     e.target.value
@@ -72,7 +63,7 @@ export default class MatchCell extends React.PureComponent{
                             value={rightPlayerPoint}
                             className="pointInput right"
                             onChange={(e)=>{
-                                this.props.onChangeRightPlayerPoint(
+                                this.props.onChangePlayerPoint(
                                     matchResultId,
                                     rightPlayerId,
                                     e.target.value
@@ -105,6 +96,7 @@ export default class MatchCell extends React.PureComponent{
         } = this.props;
         const leftPlayerPoint = matchResult.getIn([leftPlayerId, 'point']);
         const rightPlayerPoint = matchResult.getIn([rightPlayerId, 'point']);
+        const isDoneBattle = matchResult.get('isDoneBattle');
         const resultString = [leftPlayerPoint, rightPlayerPoint].join('-');
         const isOpenEditor =
             (editingLeftPlayerId === leftPlayerId)
@@ -114,7 +106,7 @@ export default class MatchCell extends React.PureComponent{
                 className="matchCell cell"
                 key={rightPlayerId}
             >
-                {this.renderCell(resultString, leftPlayerId, rightPlayerId)}
+                {this.renderCell(resultString, leftPlayerId, rightPlayerId, isDoneBattle)}
                 {this.renderEditor(
                     isOpenEditor,
                     matchResultId,

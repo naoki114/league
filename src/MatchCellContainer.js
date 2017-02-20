@@ -7,6 +7,7 @@ function mapStateToProps(state, ownProps) {
         matchResult,
         leftPlayerId,
         rightPlayerId,
+        onChangePlayerPoint,
     } = ownProps;
     return {
         matchResultId,
@@ -15,6 +16,7 @@ function mapStateToProps(state, ownProps) {
         rightPlayerId,
         editingLeftPlayerId: state.matchCell.get('editingLeftPlayerId'),
         editingRightPlayerId: state.matchCell.get('editingRightPlayerId'),
+        onChangePlayerPoint,
     };
 }
 

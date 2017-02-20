@@ -22,7 +22,9 @@ function createEmptyResult(primaryPlayerId, playerIdList){
     playerIdList.forEach((playerId)=> {
         if(primaryPlayerId !== playerId){
             const newId = primaryPlayerId + '-' + playerId;
-            matchResults[newId] = {};
+            matchResults[newId] = {
+                isDoneBattle: false,
+            };
             matchResults[newId][primaryPlayerId] = {point:0};
             matchResults[newId][playerId] = {point:0};
         }
@@ -90,17 +92,19 @@ function calcTotalResultPoint(state){
                         matchResultId = [anotherPlayerId, playerId].join('-');
                         matchResult = matchResultsMap.get(matchResultId);
                     }
-                    const playerPoint = matchResult.getIn([playerId, 'point']);
-                    const anotherPlayerPoint = matchResult.getIn([anotherPlayerId, 'point']);
-                    if (playerPoint > anotherPlayerPoint){
-                        winCount++;
-                    } else if ( playerPoint < anotherPlayerPoint) {
-                        loseCount++;
-                    } else  if (playerPoint === anotherPlayerPoint){
-                        drawCount++;
+                    if(matchResult.get('isDoneBattle')) {
+                        const playerPoint = matchResult.getIn([playerId, 'point']);
+                        const anotherPlayerPoint = matchResult.getIn([anotherPlayerId, 'point']);
+                        if (playerPoint > anotherPlayerPoint){
+                            winCount++;
+                        } else if ( playerPoint < anotherPlayerPoint) {
+                            loseCount++;
+                        } else  if (playerPoint === anotherPlayerPoint){
+                            drawCount++;
+                        }
+                        winPoint += playerPoint;
+                        winPoint -= anotherPlayerPoint;
                     }
-                    winPoint += playerPoint;
-                    winPoint -= anotherPlayerPoint;
                 }
             });
             const totalResult = new Immutable.Map({winCount, drawCount, loseCount, winPoint, playerId});
@@ -195,17 +199,17 @@ export default function matchTableReducer(state = initialState, action) {
     case matchTableActionTypes.CHANGE_TMP_PLAYER_NAME: {
         return state.set('tmpPlayerName', action.playerName);
     }
-    case matchTableActionTypes.CHANGE_LEFT_PLAYER_POINT: {
-        return state.setIn(
-            ['matchResults', 'byId', action.matchResultId, action.leftPlayerId, 'point'],
-            Number(action.leftPlayerPoint)
-        );
-    }
-    case matchTableActionTypes.CHANGE_RIGHT_PLAYER_POINT: {
-        return state.setIn(
-            ['matchResults', 'byId', action.matchResultId, action.rightPlayerId, 'point'],
-            Number(action.rightPlayerPoint)
-        );
+    case matchTableActionTypes.CHANGE_PLAYER_POINT: {
+        return state.withMutations((ctx) => {
+            ctx.setIn(
+                ['matchResults', 'byId', action.matchResultId, action.playerId, 'point'],
+                Number(action.playerPoint)
+            ).setIn(
+                ['matchResults', 'byId', action.matchResultId, 'isDoneBattle'],
+                true
+            )
+        });
+
     }
     case matchTableActionTypes.CALC_TOTAL_RESULTS: {
         const resultWithPoint = calcTotalResultPoint(state);
